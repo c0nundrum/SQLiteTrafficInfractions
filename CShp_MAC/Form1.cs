@@ -103,15 +103,9 @@ namespace CShp_MAC
                 placa.placaImg = data;
                 placa.modelo = txtModelo.Text;
                 placa.donoCPF = txtEmail.Text;
+                placa.placaNumero = txtNome.Text;
 
-                DalHelper.AddCarro(placa); //TODO not working yet
-
-                //Cliente cli = new Cliente();
-                //cli.Id = Convert.ToInt32(txtID.Text);
-                //cli.Nome = txtNome.Text;
-                //cli.Email = txtEmail.Text;
-
-                //DalHelper.Add(cli);
+                DalHelper.AddCarro(placa); 
 
                 ExibirDados();
                 LimpaDados();

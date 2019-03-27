@@ -31,11 +31,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvDados = new System.Windows.Forms.DataGridView();
-            this.txtEmail = new System.Windows.Forms.TextBox();
-            this.txtNome = new System.Windows.Forms.TextBox();
             this.txtID = new System.Windows.Forms.TextBox();
             this.EmailLbl = new System.Windows.Forms.Label();
-            this.NomeLbl = new System.Windows.Forms.Label();
             this.IdLbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnEncerrar = new System.Windows.Forms.Button();
@@ -51,6 +48,10 @@
             this.txtModelo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtNome = new System.Windows.Forms.MaskedTextBox();
+            this.txtEmail = new System.Windows.Forms.MaskedTextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).BeginInit();
             this.panel2.SuspendLayout();
@@ -58,6 +59,10 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txtEmail);
+            this.panel1.Controls.Add(this.txtNome);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.txtModelo);
             this.panel1.Controls.Add(this.label2);
@@ -65,21 +70,18 @@
             this.panel1.Controls.Add(this.btnPathToImage);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.dgvDados);
-            this.panel1.Controls.Add(this.txtEmail);
-            this.panel1.Controls.Add(this.txtNome);
             this.panel1.Controls.Add(this.txtID);
             this.panel1.Controls.Add(this.EmailLbl);
-            this.panel1.Controls.Add(this.NomeLbl);
             this.panel1.Controls.Add(this.IdLbl);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(776, 247);
+            this.panel1.Size = new System.Drawing.Size(776, 327);
             this.panel1.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(229, 197);
+            this.label1.Location = new System.Drawing.Point(257, 257);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 7;
@@ -90,28 +92,14 @@
             this.dgvDados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDados.Location = new System.Drawing.Point(19, 13);
             this.dgvDados.Name = "dgvDados";
-            this.dgvDados.Size = new System.Drawing.Size(739, 143);
+            this.dgvDados.Size = new System.Drawing.Size(739, 184);
             this.dgvDados.TabIndex = 6;
             this.dgvDados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDados_CellContentClick);
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Location = new System.Drawing.Point(113, 217);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(100, 20);
-            this.txtEmail.TabIndex = 5;
-            // 
-            // txtNome
-            // 
-            this.txtNome.Location = new System.Drawing.Point(113, 194);
-            this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(100, 20);
-            this.txtNome.TabIndex = 4;
             // 
             // txtID
             // 
             this.txtID.Enabled = false;
-            this.txtID.Location = new System.Drawing.Point(113, 169);
+            this.txtID.Location = new System.Drawing.Point(658, 290);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(100, 20);
             this.txtID.TabIndex = 3;
@@ -119,27 +107,17 @@
             // EmailLbl
             // 
             this.EmailLbl.AutoSize = true;
-            this.EmailLbl.Location = new System.Drawing.Point(15, 220);
+            this.EmailLbl.Location = new System.Drawing.Point(16, 257);
             this.EmailLbl.Name = "EmailLbl";
             this.EmailLbl.Size = new System.Drawing.Size(92, 13);
             this.EmailLbl.TabIndex = 2;
             this.EmailLbl.Text = "CPF CONDUTOR";
             this.EmailLbl.Click += new System.EventHandler(this.label3_Click);
             // 
-            // NomeLbl
-            // 
-            this.NomeLbl.AutoSize = true;
-            this.NomeLbl.Location = new System.Drawing.Point(16, 197);
-            this.NomeLbl.Name = "NomeLbl";
-            this.NomeLbl.Size = new System.Drawing.Size(41, 13);
-            this.NomeLbl.TabIndex = 1;
-            this.NomeLbl.Text = "PLACA";
-            this.NomeLbl.Click += new System.EventHandler(this.label2_Click);
-            // 
             // IdLbl
             // 
             this.IdLbl.AutoSize = true;
-            this.IdLbl.Location = new System.Drawing.Point(16, 172);
+            this.IdLbl.Location = new System.Drawing.Point(634, 293);
             this.IdLbl.Name = "IdLbl";
             this.IdLbl.Size = new System.Drawing.Size(18, 13);
             this.IdLbl.TabIndex = 0;
@@ -156,14 +134,14 @@
             this.panel2.Controls.Add(this.btnExibirDados);
             this.panel2.Controls.Add(this.btnCriarTabela);
             this.panel2.Controls.Add(this.btnCriarBancoDados);
-            this.panel2.Location = new System.Drawing.Point(12, 265);
+            this.panel2.Location = new System.Drawing.Point(12, 361);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(776, 173);
+            this.panel2.Size = new System.Drawing.Size(776, 170);
             this.panel2.TabIndex = 1;
             // 
             // btnEncerrar
             // 
-            this.btnEncerrar.Location = new System.Drawing.Point(281, 117);
+            this.btnEncerrar.Location = new System.Drawing.Point(260, 105);
             this.btnEncerrar.Name = "btnEncerrar";
             this.btnEncerrar.Size = new System.Drawing.Size(188, 23);
             this.btnEncerrar.TabIndex = 7;
@@ -173,7 +151,7 @@
             // 
             // btnLocalizarDados
             // 
-            this.btnLocalizarDados.Location = new System.Drawing.Point(281, 88);
+            this.btnLocalizarDados.Location = new System.Drawing.Point(260, 76);
             this.btnLocalizarDados.Name = "btnLocalizarDados";
             this.btnLocalizarDados.Size = new System.Drawing.Size(188, 23);
             this.btnLocalizarDados.TabIndex = 6;
@@ -183,7 +161,7 @@
             // 
             // btnExcluirDados
             // 
-            this.btnExcluirDados.Location = new System.Drawing.Point(281, 59);
+            this.btnExcluirDados.Location = new System.Drawing.Point(260, 47);
             this.btnExcluirDados.Name = "btnExcluirDados";
             this.btnExcluirDados.Size = new System.Drawing.Size(188, 23);
             this.btnExcluirDados.TabIndex = 5;
@@ -193,7 +171,7 @@
             // 
             // btnAtualizarDados
             // 
-            this.btnAtualizarDados.Location = new System.Drawing.Point(281, 30);
+            this.btnAtualizarDados.Location = new System.Drawing.Point(260, 18);
             this.btnAtualizarDados.Name = "btnAtualizarDados";
             this.btnAtualizarDados.Size = new System.Drawing.Size(188, 23);
             this.btnAtualizarDados.TabIndex = 4;
@@ -203,7 +181,7 @@
             // 
             // btnIncluirDados
             // 
-            this.btnIncluirDados.Location = new System.Drawing.Point(56, 117);
+            this.btnIncluirDados.Location = new System.Drawing.Point(35, 105);
             this.btnIncluirDados.Name = "btnIncluirDados";
             this.btnIncluirDados.Size = new System.Drawing.Size(188, 23);
             this.btnIncluirDados.TabIndex = 3;
@@ -213,7 +191,7 @@
             // 
             // btnExibirDados
             // 
-            this.btnExibirDados.Location = new System.Drawing.Point(56, 88);
+            this.btnExibirDados.Location = new System.Drawing.Point(35, 76);
             this.btnExibirDados.Name = "btnExibirDados";
             this.btnExibirDados.Size = new System.Drawing.Size(188, 23);
             this.btnExibirDados.TabIndex = 2;
@@ -223,7 +201,7 @@
             // 
             // btnCriarTabela
             // 
-            this.btnCriarTabela.Location = new System.Drawing.Point(56, 59);
+            this.btnCriarTabela.Location = new System.Drawing.Point(35, 47);
             this.btnCriarTabela.Name = "btnCriarTabela";
             this.btnCriarTabela.Size = new System.Drawing.Size(188, 23);
             this.btnCriarTabela.TabIndex = 1;
@@ -233,7 +211,7 @@
             // 
             // btnCriarBancoDados
             // 
-            this.btnCriarBancoDados.Location = new System.Drawing.Point(56, 30);
+            this.btnCriarBancoDados.Location = new System.Drawing.Point(35, 18);
             this.btnCriarBancoDados.Name = "btnCriarBancoDados";
             this.btnCriarBancoDados.Size = new System.Drawing.Size(188, 23);
             this.btnCriarBancoDados.TabIndex = 0;
@@ -243,9 +221,9 @@
             // 
             // btnPathToImage
             // 
-            this.btnPathToImage.Location = new System.Drawing.Point(322, 192);
+            this.btnPathToImage.Location = new System.Drawing.Point(350, 252);
             this.btnPathToImage.Name = "btnPathToImage";
-            this.btnPathToImage.Size = new System.Drawing.Size(124, 23);
+            this.btnPathToImage.Size = new System.Drawing.Size(172, 23);
             this.btnPathToImage.TabIndex = 8;
             this.btnPathToImage.Text = "Procurar";
             this.btnPathToImage.UseVisualStyleBackColor = true;
@@ -254,22 +232,22 @@
             // txtBoxByteString
             // 
             this.txtBoxByteString.Enabled = false;
-            this.txtBoxByteString.Location = new System.Drawing.Point(322, 217);
+            this.txtBoxByteString.Location = new System.Drawing.Point(350, 290);
             this.txtBoxByteString.Name = "txtBoxByteString";
-            this.txtBoxByteString.Size = new System.Drawing.Size(124, 20);
+            this.txtBoxByteString.Size = new System.Drawing.Size(278, 20);
             this.txtBoxByteString.TabIndex = 9;
             // 
             // txtModelo
             // 
-            this.txtModelo.Location = new System.Drawing.Point(322, 169);
+            this.txtModelo.Location = new System.Drawing.Point(114, 290);
             this.txtModelo.Name = "txtModelo";
-            this.txtModelo.Size = new System.Drawing.Size(124, 20);
+            this.txtModelo.Size = new System.Drawing.Size(100, 20);
             this.txtModelo.TabIndex = 11;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(229, 172);
+            this.label2.Location = new System.Drawing.Point(16, 293);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 10;
@@ -277,18 +255,52 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(603, 166);
+            this.button1.Location = new System.Drawing.Point(637, 223);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 23);
+            this.button1.Size = new System.Drawing.Size(121, 23);
             this.button1.TabIndex = 12;
             this.button1.Text = "Infracoes";
             this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 228);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(69, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "NUM PLACA";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(257, 293);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(57, 13);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "CAMINHO";
+            // 
+            // txtNome
+            // 
+            this.txtNome.Location = new System.Drawing.Point(114, 225);
+            this.txtNome.Mask = "AAA-0000";
+            this.txtNome.Name = "txtNome";
+            this.txtNome.Size = new System.Drawing.Size(100, 20);
+            this.txtNome.TabIndex = 17;
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Location = new System.Drawing.Point(115, 252);
+            this.txtEmail.Mask = "000.000.000-00";
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(100, 20);
+            this.txtEmail.TabIndex = 18;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1184, 543);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
@@ -304,11 +316,8 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.TextBox txtNome;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label EmailLbl;
-        private System.Windows.Forms.Label NomeLbl;
         private System.Windows.Forms.Label IdLbl;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnEncerrar;
@@ -326,6 +335,10 @@
         private System.Windows.Forms.TextBox txtModelo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.MaskedTextBox txtNome;
+        private System.Windows.Forms.MaskedTextBox txtEmail;
     }
 }
 

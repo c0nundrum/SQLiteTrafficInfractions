@@ -11,6 +11,10 @@ namespace CShp_MAC
     {
         /// <summary>
         /// The main entry point for the application.
+        /// 
+        /// DATABASE MODEL =>
+        ///     carro -> pk(placa), modelo, pk(cpf), numero
+        ///     infrações -> pk(data/hora), pk(FK(placa)), Infrações
         /// </summary>
         [STAThread]
         static void Main()

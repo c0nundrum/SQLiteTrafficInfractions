@@ -21,7 +21,7 @@ namespace csharp_Sqlite
         public static int generateRandomID()
         {
             Random random = new Random();
-            return random.Next();
+            return random.Next(9999);
         }
 
         public static void CriarBancoSQLite()
@@ -197,8 +197,8 @@ namespace csharp_Sqlite
             {
                 using (var cmd = new SQLiteCommand(DbConnection()))
                 {
-                    cmd.CommandText = "DELETE FROM Clientes Where Id=@Id";
-                    cmd.Parameters.AddWithValue("@Id", Id);
+                    cmd.CommandText = "DELETE FROM Carros Where Id=@ID";
+                    cmd.Parameters.AddWithValue("@ID", Id);
                     cmd.ExecuteNonQuery();
                 }
             }
