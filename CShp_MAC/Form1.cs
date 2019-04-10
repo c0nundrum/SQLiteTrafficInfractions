@@ -25,8 +25,12 @@ namespace CShp_MAC
             //Cria o banco se não encontrado e exibe os dados no datagridView
             DalHelper.CriarBancoSQLite();
             DalHelper.CriarTabelaSQlite();
+            DalHelper.CriarTabelaSQliteInfracoes();
             ExibirDados();
+            setUpInfracoes();
             txtID.Text = DalHelper.generateRandomID().ToString();
+
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -42,6 +46,16 @@ namespace CShp_MAC
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void setUpInfracoes()
+        {
+            string[] infracoes = new string[]{"Dirigir veículo sem possuir CNH", "Dirigir veículo com CNH cassada",
+            "Dirigir sob influência de álcool", "Recusar o teste do bafômetro", "Entregar direção a pessoa habilitada sem condições de dirigir",
+            "Dirigir ameaçando os pedestres ou os demais veículos", "Realizar manobra perigosa",
+            "Condutor envolvido em acidente que deixar de prestar socorro"};
+
+            cbbInfracoesList.Items.AddRange(infracoes);
         }
 
         private void btnCriarBancoDados_Click(object sender, EventArgs e)
@@ -77,6 +91,10 @@ namespace CShp_MAC
                 DataTable dt = new DataTable();
                 dt = DalHelper.GetCarros();
                 dgvDados.DataSource = dt;
+
+                DataTable dtInfracoes = new DataTable();
+                dtInfracoes = DalHelper.GetInfracoes();
+                dgvInfracoes.DataSource = dtInfracoes;
             }
             catch (Exception ex)
             {
@@ -126,12 +144,14 @@ namespace CShp_MAC
 
             try
             {
-                Cliente cli = new Cliente();
-                cli.Id = Convert.ToInt32(txtID.Text);
-                cli.Nome = txtNome.Text;
-                cli.Email = txtEmail.Text;
+                Placa placa = new Placa();
+                placa.ID = Convert.ToInt32(txtID.Text);
+                placa.placaImg = data;
+                placa.modelo = txtModelo.Text;
+                placa.donoCPF = txtEmail.Text;
+                placa.placaNumero = txtNome.Text;
 
-                DalHelper.Update(cli);
+                DalHelper.Update(placa);
                 ExibirDados();
             }
             catch (Exception ex)
@@ -162,15 +182,17 @@ namespace CShp_MAC
 
         private void btnLocalizarDados_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtID.Text))
+
+            if (string.IsNullOrEmpty(txtEmail.Text))
             {
-                MessageBox.Show("Informe o ID do cliente a ser Localizado");
+                MessageBox.Show("Informe o CPF do cliente a ser Localizado");
                 return;
             }
             try
             {
                 DataTable dt = new DataTable();
-                int codigo = Convert.ToInt32(txtID.Text);
+                //int codigo = Convert.ToInt32(txtID.Text);
+                string codigo = txtEmail.Text;
 
                 dt = DalHelper.GetCarro(codigo);
                 dgvDados.DataSource = dt;
@@ -212,9 +234,21 @@ namespace CShp_MAC
             txtNome.Text = "";
             txtEmail.Text = "";
             txtModelo.Text = "";
+            txtBoxByteString.Text = "";
             data = null;
         }
 
+        private void setCarsForInfraction(string cpf)
+        {
+            cbbCarrosFromCPF.Items.Clear();
+
+            List<string> carList = new List<string>();
+            carList = DalHelper.getCarsFromCPF(cpf);
+
+            string[] carListArray = carList.ToArray();
+
+            cbbCarrosFromCPF.Items.AddRange(carListArray);
+        }
 
         private void dgvDados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -225,6 +259,10 @@ namespace CShp_MAC
                 txtNome.Text = row.Cells["NUMERO"].Value.ToString();
                 txtEmail.Text = row.Cells["CPF"].Value.ToString();
                 txtModelo.Text = row.Cells["MODELO"].Value.ToString();
+
+                //UPDATE Infraction List
+                setCarsForInfraction(row.Cells["CPF"].Value.ToString());
+
             }
         }
 
@@ -257,6 +295,17 @@ namespace CShp_MAC
                 txtBoxByteString.Text = "Erro de carregamento da imagem.";
             }
 
-        } 
+        }
+
+        private void btnRandomId_Click(object sender, EventArgs e)
+        {
+            LimpaDados();
+            txtID.Text = DalHelper.generateRandomID().ToString();
+        }
+
+        private void cbbInfracoesList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

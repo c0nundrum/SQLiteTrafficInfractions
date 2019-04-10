@@ -3,19 +3,55 @@ using System;
 using System.Data;
 using System.Data.SQLite;
 using CShp_MAC.Models;
+using System.Collections.Generic;
 
 namespace csharp_Sqlite
 {
     public class DalHelper
     {
         private static SQLiteConnection sqliteConnection;
+
         public DalHelper()
         { }
+
         private static SQLiteConnection DbConnection()
         {
             sqliteConnection = new SQLiteConnection("Data Source=D:\\dadosCadastro.sqlite; Version=3;");
             sqliteConnection.Open();
             return sqliteConnection;
+        }
+
+
+        public static List<string> getCarsFromCPF(string cpf)
+        {
+            List<string> ImportedFiles = new List<string>();
+
+            SQLiteDataAdapter da = null;
+
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+                    cmd.CommandText = "SELECT * FROM Carros Where CPF= '" + cpf + "'";
+                    da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
+
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        while (rdr.Read())
+                        {
+                            Console.Write("{0} ", rdr["NUMERO"]);
+                            ImportedFiles.Add(Convert.ToString(rdr["NUMERO"]));
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return ImportedFiles;
         }
 
         public static int generateRandomID()
@@ -51,6 +87,22 @@ namespace csharp_Sqlite
             }
         }
 
+        public static void CriarTabelaSQliteInfracoes()
+        {
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS Infracoes(CPF_CONDUTOR TEXT, INFRACOES TEXT, DATA TEXT, NUMERO_PLACA TEXT)";
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static DataTable GetCarros()
         {
             SQLiteDataAdapter da = null;
@@ -60,6 +112,26 @@ namespace csharp_Sqlite
                 using (var cmd = DbConnection().CreateCommand())
                 {
                     cmd.CommandText = "SELECT * FROM Carros";
+                    da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static DataTable GetInfracoes()
+        {
+            SQLiteDataAdapter da = null;
+            DataTable dt = new DataTable();
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+                    cmd.CommandText = "SELECT * FROM Infracoes";
                     da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
                     da.Fill(dt);
                     return dt;
@@ -100,6 +172,28 @@ namespace csharp_Sqlite
                 using (var cmd = DbConnection().CreateCommand())
                 {
                     cmd.CommandText = "SELECT * FROM Carros Where Id=" + id;
+                    da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+
+        public static DataTable GetCarro(string cpf)
+        {
+            SQLiteDataAdapter da = null;
+            DataTable dt = new DataTable();
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+                    cmd.CommandText = "SELECT * FROM Carros Where CPF= '" + cpf + "'";
                     da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
                     da.Fill(dt);
                     return dt;
@@ -170,18 +264,19 @@ namespace csharp_Sqlite
                 throw ex;
             }
         }
-        public static void Update(Cliente cliente)
+        public static void Update(Placa placa)
         {
             try
             {
                 using (var cmd = new SQLiteCommand(DbConnection()))
                 {
-                    if (cliente.Id != null)
+                    if (placa.ID != null)
                     {
-                        cmd.CommandText = "UPDATE Clientes SET Nome=@Nome, Email=@Email WHERE Id=@Id";
-                        cmd.Parameters.AddWithValue("@Id", cliente.Id);
-                        cmd.Parameters.AddWithValue("@Nome", cliente.Nome);
-                        cmd.Parameters.AddWithValue("@Email", cliente.Email);
+                        cmd.CommandText = "UPDATE Carros SET CPF=@CPF, NUMERO=@NUMERO, MODELO=@MODELO WHERE ID=@ID";
+                        cmd.Parameters.AddWithValue("@ID", placa.ID);
+                        cmd.Parameters.AddWithValue("@CPF", placa.donoCPF);
+                        cmd.Parameters.AddWithValue("@NUMERO", placa.placaNumero);
+                        cmd.Parameters.AddWithValue("@MODELO", placa.modelo);
                         cmd.ExecuteNonQuery();
                     }
                 };
