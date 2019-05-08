@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.manterVeiculo = new System.Windows.Forms.Button();
             this.btnRandomId = new System.Windows.Forms.Button();
-            this.txtEmail = new System.Windows.Forms.MaskedTextBox();
-            this.txtNome = new System.Windows.Forms.MaskedTextBox();
+            this.btnLocalizarDados = new System.Windows.Forms.Button();
+            this.txtCPFCondutor = new System.Windows.Forms.MaskedTextBox();
+            this.txtNumPlaca = new System.Windows.Forms.MaskedTextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtModelo = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.txtBoxByteString = new System.Windows.Forms.TextBox();
             this.btnPathToImage = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,15 +46,12 @@
             this.IdLbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnEncerrar = new System.Windows.Forms.Button();
-            this.btnLocalizarDados = new System.Windows.Forms.Button();
             this.btnExcluirDados = new System.Windows.Forms.Button();
             this.btnAtualizarDados = new System.Windows.Forms.Button();
             this.btnIncluirDados = new System.Windows.Forms.Button();
-            this.btnExibirDados = new System.Windows.Forms.Button();
-            this.btnCriarTabela = new System.Windows.Forms.Button();
-            this.btnCriarBancoDados = new System.Windows.Forms.Button();
             this.dgvInfracoes = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
             this.cbbCarrosFromCPF = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
@@ -63,6 +61,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.mskTxTData = new System.Windows.Forms.MaskedTextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).BeginInit();
             this.panel2.SuspendLayout();
@@ -72,13 +71,13 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.manterVeiculo);
             this.panel1.Controls.Add(this.btnRandomId);
-            this.panel1.Controls.Add(this.txtEmail);
-            this.panel1.Controls.Add(this.txtNome);
+            this.panel1.Controls.Add(this.btnLocalizarDados);
+            this.panel1.Controls.Add(this.txtCPFCondutor);
+            this.panel1.Controls.Add(this.txtNumPlaca);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.txtModelo);
-            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.txtBoxByteString);
             this.panel1.Controls.Add(this.btnPathToImage);
             this.panel1.Controls.Add(this.label1);
@@ -91,6 +90,16 @@
             this.panel1.Size = new System.Drawing.Size(776, 327);
             this.panel1.TabIndex = 0;
             // 
+            // manterVeiculo
+            // 
+            this.manterVeiculo.Location = new System.Drawing.Point(15, 64);
+            this.manterVeiculo.Name = "manterVeiculo";
+            this.manterVeiculo.Size = new System.Drawing.Size(70, 47);
+            this.manterVeiculo.TabIndex = 19;
+            this.manterVeiculo.Text = "Manter Veículos";
+            this.manterVeiculo.UseVisualStyleBackColor = true;
+            this.manterVeiculo.Click += new System.EventHandler(this.manterVeiculo_Click);
+            // 
             // btnRandomId
             // 
             this.btnRandomId.Location = new System.Drawing.Point(724, 288);
@@ -101,21 +110,29 @@
             this.btnRandomId.UseVisualStyleBackColor = true;
             this.btnRandomId.Click += new System.EventHandler(this.btnRandomId_Click);
             // 
-            // txtEmail
+            // btnLocalizarDados
             // 
-            this.txtEmail.Location = new System.Drawing.Point(115, 252);
-            this.txtEmail.Mask = "000.000.000-00";
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(100, 20);
-            this.txtEmail.TabIndex = 18;
+            this.btnLocalizarDados.Location = new System.Drawing.Point(260, 35);
+            this.btnLocalizarDados.Name = "btnLocalizarDados";
+            this.btnLocalizarDados.Size = new System.Drawing.Size(188, 23);
+            this.btnLocalizarDados.TabIndex = 6;
+            this.btnLocalizarDados.Text = "Filtrar";
+            this.btnLocalizarDados.UseVisualStyleBackColor = true;
+            this.btnLocalizarDados.Click += new System.EventHandler(this.btnLocalizarDados_Click);
             // 
-            // txtNome
+            // txtCPFCondutor
             // 
-            this.txtNome.Location = new System.Drawing.Point(114, 225);
-            this.txtNome.Mask = "AAA-0000";
-            this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(100, 20);
-            this.txtNome.TabIndex = 17;
+            this.txtCPFCondutor.Location = new System.Drawing.Point(314, 9);
+            this.txtCPFCondutor.Name = "txtCPFCondutor";
+            this.txtCPFCondutor.Size = new System.Drawing.Size(100, 20);
+            this.txtCPFCondutor.TabIndex = 18;
+            // 
+            // txtNumPlaca
+            // 
+            this.txtNumPlaca.Location = new System.Drawing.Point(91, 9);
+            this.txtNumPlaca.Name = "txtNumPlaca";
+            this.txtNumPlaca.Size = new System.Drawing.Size(100, 20);
+            this.txtNumPlaca.TabIndex = 17;
             // 
             // label4
             // 
@@ -129,27 +146,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 228);
+            this.label3.Location = new System.Drawing.Point(16, 16);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 13);
             this.label3.TabIndex = 14;
             this.label3.Text = "NUM PLACA";
-            // 
-            // txtModelo
-            // 
-            this.txtModelo.Location = new System.Drawing.Point(114, 290);
-            this.txtModelo.Name = "txtModelo";
-            this.txtModelo.Size = new System.Drawing.Size(100, 20);
-            this.txtModelo.TabIndex = 11;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 293);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "MODELO";
             // 
             // txtBoxByteString
             // 
@@ -181,9 +182,9 @@
             // dgvDados
             // 
             this.dgvDados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDados.Location = new System.Drawing.Point(19, 13);
+            this.dgvDados.Location = new System.Drawing.Point(91, 64);
             this.dgvDados.Name = "dgvDados";
-            this.dgvDados.Size = new System.Drawing.Size(739, 184);
+            this.dgvDados.Size = new System.Drawing.Size(667, 167);
             this.dgvDados.TabIndex = 6;
             this.dgvDados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDados_CellContentClick);
             // 
@@ -198,7 +199,7 @@
             // EmailLbl
             // 
             this.EmailLbl.AutoSize = true;
-            this.EmailLbl.Location = new System.Drawing.Point(16, 257);
+            this.EmailLbl.Location = new System.Drawing.Point(215, 14);
             this.EmailLbl.Name = "EmailLbl";
             this.EmailLbl.Size = new System.Drawing.Size(92, 13);
             this.EmailLbl.TabIndex = 2;
@@ -218,13 +219,9 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.btnEncerrar);
-            this.panel2.Controls.Add(this.btnLocalizarDados);
             this.panel2.Controls.Add(this.btnExcluirDados);
             this.panel2.Controls.Add(this.btnAtualizarDados);
             this.panel2.Controls.Add(this.btnIncluirDados);
-            this.panel2.Controls.Add(this.btnExibirDados);
-            this.panel2.Controls.Add(this.btnCriarTabela);
-            this.panel2.Controls.Add(this.btnCriarBancoDados);
             this.panel2.Location = new System.Drawing.Point(12, 361);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(776, 170);
@@ -239,16 +236,6 @@
             this.btnEncerrar.Text = "Encerrar";
             this.btnEncerrar.UseVisualStyleBackColor = true;
             this.btnEncerrar.Click += new System.EventHandler(this.btnEncerrar_Click);
-            // 
-            // btnLocalizarDados
-            // 
-            this.btnLocalizarDados.Location = new System.Drawing.Point(260, 76);
-            this.btnLocalizarDados.Name = "btnLocalizarDados";
-            this.btnLocalizarDados.Size = new System.Drawing.Size(188, 23);
-            this.btnLocalizarDados.TabIndex = 6;
-            this.btnLocalizarDados.Text = "LocalizarDados";
-            this.btnLocalizarDados.UseVisualStyleBackColor = true;
-            this.btnLocalizarDados.Click += new System.EventHandler(this.btnLocalizarDados_Click);
             // 
             // btnExcluirDados
             // 
@@ -280,46 +267,17 @@
             this.btnIncluirDados.UseVisualStyleBackColor = true;
             this.btnIncluirDados.Click += new System.EventHandler(this.btnIncluirDados_Click);
             // 
-            // btnExibirDados
-            // 
-            this.btnExibirDados.Location = new System.Drawing.Point(35, 76);
-            this.btnExibirDados.Name = "btnExibirDados";
-            this.btnExibirDados.Size = new System.Drawing.Size(188, 23);
-            this.btnExibirDados.TabIndex = 2;
-            this.btnExibirDados.Text = "ExibirDados";
-            this.btnExibirDados.UseVisualStyleBackColor = true;
-            this.btnExibirDados.Click += new System.EventHandler(this.btnExibirDados_Click);
-            // 
-            // btnCriarTabela
-            // 
-            this.btnCriarTabela.Location = new System.Drawing.Point(35, 47);
-            this.btnCriarTabela.Name = "btnCriarTabela";
-            this.btnCriarTabela.Size = new System.Drawing.Size(188, 23);
-            this.btnCriarTabela.TabIndex = 1;
-            this.btnCriarTabela.Text = "CriarTabela";
-            this.btnCriarTabela.UseVisualStyleBackColor = true;
-            this.btnCriarTabela.Click += new System.EventHandler(this.btnCriarTabela_Click);
-            // 
-            // btnCriarBancoDados
-            // 
-            this.btnCriarBancoDados.Location = new System.Drawing.Point(35, 18);
-            this.btnCriarBancoDados.Name = "btnCriarBancoDados";
-            this.btnCriarBancoDados.Size = new System.Drawing.Size(188, 23);
-            this.btnCriarBancoDados.TabIndex = 0;
-            this.btnCriarBancoDados.Text = "Criar DB";
-            this.btnCriarBancoDados.UseVisualStyleBackColor = true;
-            this.btnCriarBancoDados.Click += new System.EventHandler(this.btnCriarBancoDados_Click);
-            // 
             // dgvInfracoes
             // 
             this.dgvInfracoes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvInfracoes.Location = new System.Drawing.Point(16, 13);
+            this.dgvInfracoes.Location = new System.Drawing.Point(109, 64);
             this.dgvInfracoes.Name = "dgvInfracoes";
-            this.dgvInfracoes.Size = new System.Drawing.Size(495, 314);
+            this.dgvInfracoes.Size = new System.Drawing.Size(402, 167);
             this.dgvInfracoes.TabIndex = 2;
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.button3);
             this.panel3.Controls.Add(this.cbbCarrosFromCPF);
             this.panel3.Controls.Add(this.label8);
             this.panel3.Controls.Add(this.button2);
@@ -334,6 +292,15 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(535, 519);
             this.panel3.TabIndex = 3;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(16, 76);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 42);
+            this.button3.TabIndex = 24;
+            this.button3.Text = "Manter Infracoes";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // cbbCarrosFromCPF
             // 
@@ -416,6 +383,11 @@
             this.mskTxTData.TabIndex = 3;
             this.mskTxTData.ValidatingType = typeof(System.DateTime);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -449,19 +421,14 @@
         private System.Windows.Forms.Button btnExcluirDados;
         private System.Windows.Forms.Button btnAtualizarDados;
         private System.Windows.Forms.Button btnIncluirDados;
-        private System.Windows.Forms.Button btnExibirDados;
-        private System.Windows.Forms.Button btnCriarTabela;
-        private System.Windows.Forms.Button btnCriarBancoDados;
         private System.Windows.Forms.DataGridView dgvDados;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnPathToImage;
         private System.Windows.Forms.TextBox txtBoxByteString;
-        private System.Windows.Forms.TextBox txtModelo;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.MaskedTextBox txtNome;
-        private System.Windows.Forms.MaskedTextBox txtEmail;
+        private System.Windows.Forms.MaskedTextBox txtNumPlaca;
+        private System.Windows.Forms.MaskedTextBox txtCPFCondutor;
         private System.Windows.Forms.Button btnRandomId;
         private System.Windows.Forms.DataGridView dgvInfracoes;
         private System.Windows.Forms.Panel panel3;
@@ -474,6 +441,9 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ComboBox cbbCarrosFromCPF;
+        private System.Windows.Forms.Button manterVeiculo;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
 

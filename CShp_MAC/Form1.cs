@@ -1,38 +1,31 @@
 ﻿using System;
-using csharp_Sqlite.Models;
 using csharp_Sqlite;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using System.Data;
 using CShp_MAC.Models;
 
 namespace CShp_MAC
 {
     public partial class Form1 : Form
     {
+
         byte[] data = null;
 
         public Form1()
         {
             InitializeComponent();
-            //Cria o banco se não encontrado e exibe os dados no datagridView
-            DalHelper.CriarBancoSQLite();
-            DalHelper.CriarTabelaSQlite();
-            DalHelper.CriarTabelaSQliteInfracoes();
-            ExibirDados();
-            setUpInfracoes();
-            txtID.Text = DalHelper.generateRandomID().ToString();
 
-            
+            //Cria o banco e tabelas se não encontrados
+            createDatabaseFile();
+
+            //Cria lista de infracoes
+            setUpInfracoesLista();
+
         }
 
+        //Metodos de Interface
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -48,7 +41,7 @@ namespace CShp_MAC
 
         }
 
-        private void setUpInfracoes()
+        private void setUpInfracoesLista()
         {
             string[] infracoes = new string[]{"Dirigir veículo sem possuir CNH", "Dirigir veículo com CNH cassada",
             "Dirigir sob influência de álcool", "Recusar o teste do bafômetro", "Entregar direção a pessoa habilitada sem condições de dirigir",
@@ -58,53 +51,62 @@ namespace CShp_MAC
             cbbInfracoesList.Items.AddRange(infracoes);
         }
 
-        private void btnCriarBancoDados_Click(object sender, EventArgs e)
+        private bool Valida()
         {
-            try
+            if (string.IsNullOrEmpty(txtID.Text) && string.IsNullOrEmpty(txtNumPlaca.Text) && string.IsNullOrEmpty(txtCPFCondutor.Text) && data == null)
             {
-                DalHelper.CriarBancoSQLite();
-                btnCriarBancoDados.Enabled = false;
+                return false;
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Erro : " + ex.Message);
+                return true;
             }
         }
 
-        private void btnCriarTabela_Click(object sender, EventArgs e)
+
+        //Metodos de conexão
+
+        private void createDatabaseFile()
         {
-            try
-            {
-                DalHelper.CriarTabelaSQlite();
-                btnCriarTabela.Enabled = false;
+
+            string curFile = @"D:\dados\Cadastro.sqlite";
+            if (File.Exists(curFile)) {
+
+                Console.WriteLine("Database found!");
+
+            } else {
+
+                Console.WriteLine("Database not found, creating Cadastro.sqlite!");
+                DalHelper.CriarBancoSQLite();
+                //Cria Tabelas
+                DalHelper.CriarTableProprietarioSQlite();
+                DalHelper.CriarTableCarroSQlite();
+                DalHelper.CriarTableInfracoesSQlite();
+
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro : " + ex.Message);
-            }
+           
         }
 
         private void ExibirDados()
         {
             try
             {
+
+                //Carros
                 DataTable dt = new DataTable();
-                dt = DalHelper.GetCarros();
+                dt = DalHelper.populateCarroTable();
                 dgvDados.DataSource = dt;
 
+                //Infracoes
                 DataTable dtInfracoes = new DataTable();
-                dtInfracoes = DalHelper.GetInfracoes();
+                dtInfracoes = DalHelper.populateInfracoesTable();
                 dgvInfracoes.DataSource = dtInfracoes;
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro : " + ex.Message);
             }
-        }
-
-        private void btnExibirDados_Click(object sender, EventArgs e)
-        {
-            ExibirDados();
         }
 
         private void btnIncluirDados_Click(object sender, EventArgs e)
@@ -119,9 +121,9 @@ namespace CShp_MAC
                 Placa placa = new Placa();
                 placa.ID = Convert.ToInt32(txtID.Text);
                 placa.placaImg = data;
-                placa.modelo = txtModelo.Text;
-                placa.donoCPF = txtEmail.Text;
-                placa.placaNumero = txtNome.Text;
+                //placa.modelo = txtModelo.Text;
+                placa.donoCPF = txtCPFCondutor.Text;
+                placa.placaNumero = txtNumPlaca.Text;
 
                 DalHelper.AddCarro(placa); 
 
@@ -147,9 +149,9 @@ namespace CShp_MAC
                 Placa placa = new Placa();
                 placa.ID = Convert.ToInt32(txtID.Text);
                 placa.placaImg = data;
-                placa.modelo = txtModelo.Text;
-                placa.donoCPF = txtEmail.Text;
-                placa.placaNumero = txtNome.Text;
+                //placa.modelo = txtModelo.Text;
+                placa.donoCPF = txtCPFCondutor.Text;
+                placa.placaNumero = txtNumPlaca.Text;
 
                 DalHelper.Update(placa);
                 ExibirDados();
@@ -183,24 +185,44 @@ namespace CShp_MAC
         private void btnLocalizarDados_Click(object sender, EventArgs e)
         {
 
-            if (string.IsNullOrEmpty(txtEmail.Text))
+            if (string.IsNullOrEmpty(txtNumPlaca.Text) && string.IsNullOrEmpty(txtCPFCondutor.Text))
             {
-                MessageBox.Show("Informe o CPF do cliente a ser Localizado");
-                return;
-            }
-            try
-            {
-                DataTable dt = new DataTable();
-                //int codigo = Convert.ToInt32(txtID.Text);
-                string codigo = txtEmail.Text;
 
-                dt = DalHelper.GetCarro(codigo);
-                dgvDados.DataSource = dt;
-            }
-            catch (Exception ex)
+                //Exibe todos os Dados se não houver digitado
+                ExibirDados();
+
+            } else if (!string.IsNullOrEmpty(txtNumPlaca.Text) && string.IsNullOrEmpty(txtCPFCondutor.Text))
             {
-                MessageBox.Show("Erro : " + ex.Message);
+
+                DataTable dt = new DataTable();
+                dt = DalHelper.filtraPlacasCarros(txtNumPlaca.Text);
+                dgvDados.DataSource = dt;
+
+            } else if (string.IsNullOrEmpty(txtNumPlaca.Text) && !string.IsNullOrEmpty(txtCPFCondutor.Text))
+            {
+
             }
+
+
+
+            //if (string.IsNullOrEmpty(txtEmail.Text))
+            //{
+            //    MessageBox.Show("Informe o CPF do cliente a ser Localizado");
+            //    return;
+            //}
+            //try
+            //{
+            //    DataTable dt = new DataTable();
+            //    //int codigo = Convert.ToInt32(txtID.Text);
+            //    string codigo = txtEmail.Text;
+
+                //    dt = DalHelper.GetCarro(codigo);
+                //    dgvDados.DataSource = dt;
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show("Erro : " + ex.Message);
+                //}
         }
 
         private void btnEncerrar_Click(object sender, EventArgs e)
@@ -216,24 +238,14 @@ namespace CShp_MAC
             }
         }
 
-        private bool Valida()
-        {
-            if (string.IsNullOrEmpty(txtID.Text) && string.IsNullOrEmpty(txtNome.Text) && string.IsNullOrEmpty(txtEmail.Text) && string.IsNullOrEmpty(txtModelo.Text) && data == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+
 
         private void LimpaDados()
         {
             txtID.Text = "";
-            txtNome.Text = "";
-            txtEmail.Text = "";
-            txtModelo.Text = "";
+            txtNumPlaca.Text = "";
+            txtCPFCondutor.Text = "";
+            //txtModelo.Text = "";
             txtBoxByteString.Text = "";
             data = null;
         }
@@ -243,7 +255,7 @@ namespace CShp_MAC
             cbbCarrosFromCPF.Items.Clear();
 
             List<string> carList = new List<string>();
-            carList = DalHelper.getCarsFromCPF(cpf);
+            //carList = DalHelper.getCarsFromCPF(cpf);
 
             string[] carListArray = carList.ToArray();
 
@@ -256,14 +268,18 @@ namespace CShp_MAC
             {
                 DataGridViewRow row = this.dgvDados.Rows[e.RowIndex];
                 txtID.Text = row.Cells["ID"].Value.ToString();
-                txtNome.Text = row.Cells["NUMERO"].Value.ToString();
-                txtEmail.Text = row.Cells["CPF"].Value.ToString();
-                txtModelo.Text = row.Cells["MODELO"].Value.ToString();
+                txtNumPlaca.Text = row.Cells["NUMERO"].Value.ToString();
+                txtCPFCondutor.Text = row.Cells["CPF"].Value.ToString();
+                //txtModelo.Text = row.Cells["MODELO"].Value.ToString();
+
+                txtReaderCPF.Text = row.Cells["CPF"].Value.ToString();
 
                 //UPDATE Infraction List
                 setCarsForInfraction(row.Cells["CPF"].Value.ToString());
 
             }
+
+
         }
 
         private void btnPathToImage_Click(object sender, EventArgs e)
@@ -300,11 +316,19 @@ namespace CShp_MAC
         private void btnRandomId_Click(object sender, EventArgs e)
         {
             LimpaDados();
-            txtID.Text = DalHelper.generateRandomID().ToString();
+            //txtID.Text = DalHelper.generateRandomID().ToString();
         }
 
         private void cbbInfracoesList_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void manterVeiculo_Click(object sender, EventArgs e)
+        {
+            Form2 carMaintenanceForm = new Form2();
+
+            carMaintenanceForm.ShowDialog();
 
         }
     }
