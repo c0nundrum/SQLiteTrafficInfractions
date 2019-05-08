@@ -16,5 +16,23 @@ namespace CShp_MAC
         {
             InitializeComponent();
         }
+
+        public void inicializaTextBox(string numPlaca, string cpf)
+        {
+            numeroPlaca.Text = numPlaca;
+
+            cpfProprietario.Text = cpf;
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void adicionarEntrada_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

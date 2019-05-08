@@ -13,6 +13,11 @@ namespace CShp_MAC
 
         byte[] data = null;
 
+        string placaSelecionada = "";
+        string cpfSelecionado = "";
+
+        
+
         public Form1()
         {
             InitializeComponent();
@@ -328,8 +333,11 @@ namespace CShp_MAC
         {
             Form2 carMaintenanceForm = new Form2();
 
+            carMaintenanceForm.inicializaTextBox(placaSelecionada, cpfSelecionado);
+
             carMaintenanceForm.ShowDialog();
 
         }
+
     }
 }

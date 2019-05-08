@@ -62,6 +62,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.mskTxTData = new System.Windows.Forms.MaskedTextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.nomeProprietarioTxt = new System.Windows.Forms.TextBox();
+            this.cpfTxt = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).BeginInit();
             this.panel2.SuspendLayout();
@@ -71,6 +75,10 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cpfTxt);
+            this.panel1.Controls.Add(this.nomeProprietarioTxt);
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.manterVeiculo);
             this.panel1.Controls.Add(this.btnRandomId);
             this.panel1.Controls.Add(this.btnLocalizarDados);
@@ -112,7 +120,7 @@
             // 
             // btnLocalizarDados
             // 
-            this.btnLocalizarDados.Location = new System.Drawing.Point(260, 35);
+            this.btnLocalizarDados.Location = new System.Drawing.Point(318, 35);
             this.btnLocalizarDados.Name = "btnLocalizarDados";
             this.btnLocalizarDados.Size = new System.Drawing.Size(188, 23);
             this.btnLocalizarDados.TabIndex = 6;
@@ -122,14 +130,14 @@
             // 
             // txtCPFCondutor
             // 
-            this.txtCPFCondutor.Location = new System.Drawing.Point(314, 9);
+            this.txtCPFCondutor.Location = new System.Drawing.Point(638, 11);
             this.txtCPFCondutor.Name = "txtCPFCondutor";
             this.txtCPFCondutor.Size = new System.Drawing.Size(100, 20);
             this.txtCPFCondutor.TabIndex = 18;
             // 
             // txtNumPlaca
             // 
-            this.txtNumPlaca.Location = new System.Drawing.Point(91, 9);
+            this.txtNumPlaca.Location = new System.Drawing.Point(146, 11);
             this.txtNumPlaca.Name = "txtNumPlaca";
             this.txtNumPlaca.Size = new System.Drawing.Size(100, 20);
             this.txtNumPlaca.TabIndex = 17;
@@ -137,7 +145,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(257, 293);
+            this.label4.Location = new System.Drawing.Point(479, 273);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(57, 13);
             this.label4.TabIndex = 16;
@@ -146,7 +154,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 16);
+            this.label3.Location = new System.Drawing.Point(71, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 13);
             this.label3.TabIndex = 14;
@@ -155,14 +163,14 @@
             // txtBoxByteString
             // 
             this.txtBoxByteString.Enabled = false;
-            this.txtBoxByteString.Location = new System.Drawing.Point(350, 290);
+            this.txtBoxByteString.Location = new System.Drawing.Point(440, 286);
             this.txtBoxByteString.Name = "txtBoxByteString";
             this.txtBoxByteString.Size = new System.Drawing.Size(278, 20);
             this.txtBoxByteString.TabIndex = 9;
             // 
             // btnPathToImage
             // 
-            this.btnPathToImage.Location = new System.Drawing.Point(350, 252);
+            this.btnPathToImage.Location = new System.Drawing.Point(512, 247);
             this.btnPathToImage.Name = "btnPathToImage";
             this.btnPathToImage.Size = new System.Drawing.Size(172, 23);
             this.btnPathToImage.TabIndex = 8;
@@ -173,7 +181,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(257, 257);
+            this.label1.Location = new System.Drawing.Point(419, 252);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 7;
@@ -199,7 +207,7 @@
             // EmailLbl
             // 
             this.EmailLbl.AutoSize = true;
-            this.EmailLbl.Location = new System.Drawing.Point(215, 14);
+            this.EmailLbl.Location = new System.Drawing.Point(540, 16);
             this.EmailLbl.Name = "EmailLbl";
             this.EmailLbl.Size = new System.Drawing.Size(92, 13);
             this.EmailLbl.TabIndex = 2;
@@ -388,6 +396,38 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(88, 252);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(108, 13);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Nome do proprietario:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(88, 288);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(97, 13);
+            this.label9.TabIndex = 21;
+            this.label9.Text = "Cpf do Proprietario:";
+            // 
+            // nomeProprietarioTxt
+            // 
+            this.nomeProprietarioTxt.Location = new System.Drawing.Point(202, 249);
+            this.nomeProprietarioTxt.Name = "nomeProprietarioTxt";
+            this.nomeProprietarioTxt.Size = new System.Drawing.Size(100, 20);
+            this.nomeProprietarioTxt.TabIndex = 22;
+            // 
+            // cpfTxt
+            // 
+            this.cpfTxt.Location = new System.Drawing.Point(202, 285);
+            this.cpfTxt.Name = "cpfTxt";
+            this.cpfTxt.Size = new System.Drawing.Size(100, 20);
+            this.cpfTxt.TabIndex = 23;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -444,6 +484,10 @@
         private System.Windows.Forms.Button manterVeiculo;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox cpfTxt;
+        private System.Windows.Forms.TextBox nomeProprietarioTxt;
     }
 }
 
