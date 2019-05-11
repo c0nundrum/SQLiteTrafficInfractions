@@ -5,6 +5,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.IO;
 using CShp_MAC.Models;
+using System.Diagnostics;
 
 namespace CShp_MAC
 {
@@ -251,25 +252,15 @@ namespace CShp_MAC
             //cbbCarrosFromCPF.Items.AddRange(carListArray);
         }
 
+
+
         private void dgvDados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //    if (e.RowIndex >= 0)
-            //    {
-            //        DataGridViewRow row = this.dgvDados.Rows[e.RowIndex];
-            //        txtID.Text = row.Cells["ID"].Value.ToString();
-            //        txtNumPlaca.Text = row.Cells["NUMERO"].Value.ToString();
-            //        txtCPFCondutor.Text = row.Cells["CPF"].Value.ToString();
-            //        //txtModelo.Text = row.Cells["MODELO"].Value.ToString();
 
-            //        txtReaderCPF.Text = row.Cells["CPF"].Value.ToString();
-
-            //        //UPDATE Infraction List
-            //        setCarsForInfraction(row.Cells["CPF"].Value.ToString());
-
-            //    }
+            
 
 
-         }
+        }
 
             //private void btnPathToImage_Click(object sender, EventArgs e)
             //{
@@ -323,9 +314,30 @@ namespace CShp_MAC
 
         }
 
+
+        private void dgvDados_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dgvDados.Rows[e.RowIndex];
+
+                placaSelecionada = row.Cells["PLACA_NUMBER"].Value.ToString();
+                cpfSelecionado = row.Cells["CPF"].Value.ToString();
+
+                Debug.WriteLine(placaSelecionada);
+                Debug.WriteLine(cpfSelecionado);
+
+                //UPDATE Infraction List
+                //setCarsForInfraction(row.Cells["CPF"].Value.ToString());
+
+            }
+
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
-            Form3 infractionMaintenanceForm = new Form3();
+            Form3 infractionMaintenanceForm = new Form3(placaSelecionada, cpfSelecionado);
 
             infractionMaintenanceForm.Show();
         }

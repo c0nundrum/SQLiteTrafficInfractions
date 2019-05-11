@@ -34,6 +34,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.atualizarBtn = new System.Windows.Forms.Button();
             this.excluirBtn = new System.Windows.Forms.Button();
+            this.infracoesCBB = new System.Windows.Forms.ComboBox();
+            this.carroTxtBox = new System.Windows.Forms.TextBox();
+            this.cpfTextBox = new System.Windows.Forms.TextBox();
+            this.infracaoData = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // label1
@@ -75,27 +79,64 @@
             // 
             // atualizarBtn
             // 
-            this.atualizarBtn.Location = new System.Drawing.Point(151, 216);
+            this.atualizarBtn.Location = new System.Drawing.Point(244, 216);
             this.atualizarBtn.Name = "atualizarBtn";
             this.atualizarBtn.Size = new System.Drawing.Size(118, 23);
             this.atualizarBtn.TabIndex = 4;
             this.atualizarBtn.Text = "Atualizar / Adicionar";
             this.atualizarBtn.UseVisualStyleBackColor = true;
+            this.atualizarBtn.Click += new System.EventHandler(this.atualizarBtn_Click);
             // 
             // excluirBtn
             // 
-            this.excluirBtn.Location = new System.Drawing.Point(44, 216);
+            this.excluirBtn.Location = new System.Drawing.Point(126, 216);
             this.excluirBtn.Name = "excluirBtn";
             this.excluirBtn.Size = new System.Drawing.Size(75, 23);
             this.excluirBtn.TabIndex = 5;
             this.excluirBtn.Text = "Excluir";
             this.excluirBtn.UseVisualStyleBackColor = true;
             // 
+            // infracoesCBB
+            // 
+            this.infracoesCBB.FormattingEnabled = true;
+            this.infracoesCBB.Location = new System.Drawing.Point(126, 100);
+            this.infracoesCBB.Name = "infracoesCBB";
+            this.infracoesCBB.Size = new System.Drawing.Size(236, 21);
+            this.infracoesCBB.TabIndex = 6;
+            this.infracoesCBB.SelectedIndexChanged += new System.EventHandler(this.infracoesCBB_SelectedIndexChanged);
+            // 
+            // carroTxtBox
+            // 
+            this.carroTxtBox.Enabled = false;
+            this.carroTxtBox.Location = new System.Drawing.Point(126, 62);
+            this.carroTxtBox.Name = "carroTxtBox";
+            this.carroTxtBox.Size = new System.Drawing.Size(236, 20);
+            this.carroTxtBox.TabIndex = 7;
+            this.carroTxtBox.Text = "Carro Placa";
+            // 
+            // cpfTextBox
+            // 
+            this.cpfTextBox.Location = new System.Drawing.Point(126, 26);
+            this.cpfTextBox.Name = "cpfTextBox";
+            this.cpfTextBox.Size = new System.Drawing.Size(236, 20);
+            this.cpfTextBox.TabIndex = 8;
+            // 
+            // infracaoData
+            // 
+            this.infracaoData.Location = new System.Drawing.Point(126, 132);
+            this.infracaoData.Name = "infracaoData";
+            this.infracaoData.Size = new System.Drawing.Size(205, 20);
+            this.infracaoData.TabIndex = 9;
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(299, 266);
+            this.ClientSize = new System.Drawing.Size(414, 266);
+            this.Controls.Add(this.infracaoData);
+            this.Controls.Add(this.cpfTextBox);
+            this.Controls.Add(this.carroTxtBox);
+            this.Controls.Add(this.infracoesCBB);
             this.Controls.Add(this.excluirBtn);
             this.Controls.Add(this.atualizarBtn);
             this.Controls.Add(this.label4);
@@ -117,5 +158,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button atualizarBtn;
         private System.Windows.Forms.Button excluirBtn;
+        private System.Windows.Forms.ComboBox infracoesCBB;
+        private System.Windows.Forms.TextBox carroTxtBox;
+        private System.Windows.Forms.TextBox cpfTextBox;
+        private System.Windows.Forms.DateTimePicker infracaoData;
     }
 }

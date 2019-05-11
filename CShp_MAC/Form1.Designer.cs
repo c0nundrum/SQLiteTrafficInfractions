@@ -109,8 +109,10 @@
             this.dgvDados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDados.Location = new System.Drawing.Point(91, 64);
             this.dgvDados.Name = "dgvDados";
+            this.dgvDados.ReadOnly = true;
             this.dgvDados.Size = new System.Drawing.Size(667, 167);
             this.dgvDados.TabIndex = 6;
+            this.dgvDados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDados_CellClick);
             this.dgvDados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDados_CellContentClick);
             // 
             // EmailLbl
@@ -159,7 +161,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1345, 287);
+            this.ClientSize = new System.Drawing.Size(1345, 295);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";

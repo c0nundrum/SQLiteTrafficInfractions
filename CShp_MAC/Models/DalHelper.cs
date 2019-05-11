@@ -267,6 +267,50 @@ namespace csharp_Sqlite
             }
         }
 
+        public static void insertInfracoes(Infracao infracao)
+        {
+
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+
+                    string ownerId = getOwnerId(infracao.cpfNumero);
+                    string carId = getIdFromPlaca(infracao.placaNumero);
+
+                    while (string.IsNullOrEmpty(ownerId))
+                    {
+                        Form4 ownerForm = new Form4(infracao.cpfNumero);
+
+                        var result = ownerForm.ShowDialog();
+
+                        if (result == DialogResult.Cancel)
+                        {
+                            return;
+                        }
+
+                        ownerId = getOwnerId(infracao.cpfNumero);
+
+                    }
+
+                    cmd.CommandText = "INSERT INTO INFRACOES(PROPRIETARIO_ID, INFRACOES, DATA, CARRO_ID ) values (@PROPRIETARIO_ID, @INFRACOES, @DATA, @CARRO_ID)";
+
+                    cmd.Parameters.AddWithValue("@PROPRIETARIO_ID", ownerId);
+                    cmd.Parameters.AddWithValue("@INFRACOES", infracao.infracao);
+                    cmd.Parameters.AddWithValue("@DATA", infracao.data);
+                    cmd.Parameters.AddWithValue("@CARRO_ID", carId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Excepted in AddCarro");
+                throw ex;
+            }
+
+        }
+
         //Table Populating methods
 
         public static DataTable populateInfracoesTable()
@@ -277,7 +321,7 @@ namespace csharp_Sqlite
             {
                 using (var cmd = DbConnection().CreateCommand())
                 {
-                    cmd.CommandText = "SELECT INFRACOES, DATA FROM INFRACOES";
+                    cmd.CommandText = "SELECT INFRACOES, DATA, PLACA_NUMBER, CPF, NOME FROM INFRACOES INNER JOIN PROPRIETARIO ON INFRACOES.PROPRIETARIO_ID = PROPRIETARIO.ROWID INNER JOIN CARRO ON INFRACOES.CARRO_ID = CARRO.ROWID";
                     da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
                     da.Fill(dt);
                     return dt;
