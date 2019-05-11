@@ -59,6 +59,8 @@ namespace CShp_MAC
             infracao.infracao = infracaoSelecionada;
 
             DalHelper.insertInfracoes(infracao);
+            
+            //TODO: VALIDA DADOS INFRACOES E DATA, FAZER METODOS DE PESQUISA NO FORM1, FAZER METODOS DE UPDATE AQUI E NO UPDATE CARROS
 
         }
     }

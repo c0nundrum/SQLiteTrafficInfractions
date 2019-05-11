@@ -85,7 +85,7 @@ namespace csharp_Sqlite
                 using (var cmd = DbConnection().CreateCommand())
                 {
                     //cmd.CommandText = "CREATE TABLE IF NOT EXISTS Carros(ID INTEGER, PLACA BLOB, CPF TEXT, NUMERO TEXT, MODELO TEXT)";
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS CARRO(ID INT PRIMARY KEY AUTOINCREMENT, PLACA_NUMBER TEXT UNIQUE NOT NULL, PLACA BLOB, PROPRIETARIO_ID INT, FOREIGN KEY(PROPRIETARIO_ID) REFERENCES PROPRIETARIO(ID))";
+                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS CARRO(ID INTEGER PRIMARY KEY AUTOINCREMENT, PLACA_NUMBER TEXT UNIQUE NOT NULL, PLACA BLOB, PROPRIETARIO_ID INT, FOREIGN KEY(PROPRIETARIO_ID) REFERENCES PROPRIETARIO(ID))";
 
                     cmd.ExecuteNonQuery();
                 }
@@ -102,8 +102,9 @@ namespace csharp_Sqlite
             {
                 using (var cmd = DbConnection().CreateCommand())
                 {
-                    string cmdString = "SELECT ID FROM PROPRIETARIO WHERE CPF = " + placa.donoCPF;
+
                     string ownerId = getOwnerId(placa.donoCPF);
+
 
                     while (string.IsNullOrEmpty(ownerId))
                     {
@@ -120,7 +121,8 @@ namespace csharp_Sqlite
 
                     }
 
-                    cmd.CommandText = "INSERT INTO CARRO(PLACA_NUMBER, PLACA, PROPRIETARIO_ID ) values (@PLACA_NUMBER, @PLACA, @PROPRIETARIO_ID)";
+
+                    cmd.CommandText = "INSERT OR REPLACE INTO CARRO(PLACA_NUMBER, PLACA, PROPRIETARIO_ID ) values (@PLACA_NUMBER, @PLACA, @PROPRIETARIO_ID)";
 
                     cmd.Parameters.AddWithValue("@PLACA_NUMBER", placa.placaNumero);
                     cmd.Parameters.AddWithValue("@PLACA", placa.placaImg);
@@ -135,6 +137,7 @@ namespace csharp_Sqlite
                 throw ex;
             }
         }
+
 
         public static void deleteCarro(string RowId)
         {
@@ -214,7 +217,7 @@ namespace csharp_Sqlite
                 using (var cmd = DbConnection().CreateCommand())
                 {
 
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS PROPRIETARIO(ID INT PRIMARY KEY AUTOINCREMENT, CPF TEXT UNIQUE NOT NULL, NOME TEXT)";
+                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS PROPRIETARIO(ID INTEGER PRIMARY KEY AUTOINCREMENT, CPF TEXT UNIQUE NOT NULL, NOME TEXT)";
 
                     cmd.ExecuteNonQuery();
 
@@ -257,7 +260,7 @@ namespace csharp_Sqlite
             {
                 using (var cmd = DbConnection().CreateCommand())
                 {
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS INFRACOES(ID INT PRIMARY KEY AUTOINCREMENT, PROPRIETARIO_ID INT, INFRACOES TEXT, DATA TEXT, CARRO_ID INT, FOREIGN KEY(PROPRIETARIO_ID) REFERENCES PROPRIETARIO(ID), FOREIGN KEY(CARRO_ID) REFERENCES CARRO(ID))";
+                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS INFRACOES(ID INTEGER PRIMARY KEY AUTOINCREMENT, PROPRIETARIO_ID INT, CARRO_ID INT, INFRACOES TEXT NOT NULL, DATA TEXT NOT NULL, UNIQUE (INFRACOES, DATA) , FOREIGN KEY(PROPRIETARIO_ID) REFERENCES PROPRIETARIO(ID), FOREIGN KEY(CARRO_ID) REFERENCES CARRO(ID))";
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -293,7 +296,7 @@ namespace csharp_Sqlite
 
                     }
 
-                    cmd.CommandText = "INSERT INTO INFRACOES(PROPRIETARIO_ID, INFRACOES, DATA, CARRO_ID ) values (@PROPRIETARIO_ID, @INFRACOES, @DATA, @CARRO_ID)";
+                    cmd.CommandText = "INSERT OR REPLACE INTO INFRACOES(PROPRIETARIO_ID, INFRACOES, DATA, CARRO_ID ) values (@PROPRIETARIO_ID, @INFRACOES, @DATA, @CARRO_ID)";
 
                     cmd.Parameters.AddWithValue("@PROPRIETARIO_ID", ownerId);
                     cmd.Parameters.AddWithValue("@INFRACOES", infracao.infracao);
