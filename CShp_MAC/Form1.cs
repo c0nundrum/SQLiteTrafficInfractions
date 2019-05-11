@@ -56,17 +56,17 @@ namespace CShp_MAC
             cbbInfracoesList.Items.AddRange(infracoes);
         }
 
-        private bool Valida()
-        {
-            if (string.IsNullOrEmpty(txtID.Text) && string.IsNullOrEmpty(txtNumPlaca.Text) && string.IsNullOrEmpty(txtCPFCondutor.Text) && data == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+        //private bool Valida()
+        //{
+        //    if (string.IsNullOrEmpty(txtID.Text) && string.IsNullOrEmpty(txtNumPlaca.Text) && string.IsNullOrEmpty(txtCPFCondutor.Text) && data == null)
+        //    {
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }
+        //}
 
 
         //Metodos de conexão
@@ -114,78 +114,78 @@ namespace CShp_MAC
             }
         }
 
-        private void btnIncluirDados_Click(object sender, EventArgs e)
-        {
-            if (!Valida())
-            {
-                MessageBox.Show("Informe os dados cliente a incluir");
-                return;
-            }
-            try
-            {
-                Placa placa = new Placa();
-                placa.ID = Convert.ToInt32(txtID.Text);
-                placa.placaImg = data;
-                //placa.modelo = txtModelo.Text;
-                placa.donoCPF = txtCPFCondutor.Text;
-                placa.placaNumero = txtNumPlaca.Text;
+        //private void btnIncluirDados_Click(object sender, EventArgs e)
+        //{
+        //    if (!Valida())
+        //    {
+            //    MessageBox.Show("Informe os dados cliente a incluir");
+            //    return;
+            //}
+            //try
+            //{
+            //    Placa placa = new Placa();
+            //    placa.ID = Convert.ToInt32(txtID.Text);
+            //    placa.placaImg = data;
+            //    //placa.modelo = txtModelo.Text;
+            //    placa.donoCPF = txtCPFCondutor.Text;
+            //    placa.placaNumero = txtNumPlaca.Text;
 
-                DalHelper.AddCarro(placa); 
+        //        DalHelper.AddCarro(placa); 
 
-                ExibirDados();
-                LimpaDados();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro : " + ex.Message);
-            }
-        }
+        //        ExibirDados();
+        //        LimpaDados();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Erro : " + ex.Message);
+        //    }
+        //}
 
-        private void btnAtualizarDados_Click(object sender, EventArgs e)
-        {
-            if (!Valida())
-            {
-                MessageBox.Show("Informe os dados cliente a atualizar");
-                return;
-            }
+        //private void btnAtualizarDados_Click(object sender, EventArgs e)
+        //{
+        //    if (!Valida())
+        //    {
+        //        MessageBox.Show("Informe os dados cliente a atualizar");
+        //        return;
+        //    }
 
-            try
-            {
-                Placa placa = new Placa();
-                placa.ID = Convert.ToInt32(txtID.Text);
-                placa.placaImg = data;
-                //placa.modelo = txtModelo.Text;
-                placa.donoCPF = txtCPFCondutor.Text;
-                placa.placaNumero = txtNumPlaca.Text;
+        //    try
+        //    {
+        //        Placa placa = new Placa();
+        //        placa.ID = Convert.ToInt32(txtID.Text);
+        //        placa.placaImg = data;
+        //        //placa.modelo = txtModelo.Text;
+        //        placa.donoCPF = txtCPFCondutor.Text;
+        //        placa.placaNumero = txtNumPlaca.Text;
 
-                DalHelper.Update(placa);
-                ExibirDados();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro : " + ex.Message);
-            }
-        }
+        //        DalHelper.Update(placa);
+        //        ExibirDados();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Erro : " + ex.Message);
+        //    }
+        //}
 
-        private void btnExcluirDados_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtID.Text))
-            {
-                MessageBox.Show("Informe o ID do cliente a ser Excluído");
-                return;
-            }
-            try
-            {
-                int codigo = Convert.ToInt32(txtID.Text);
-                DalHelper.Delete(codigo);
-                ExibirDados();
-                LimpaDados();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro : " + ex.Message);
-            }
-        }
+        //private void btnExcluirDados_Click(object sender, EventArgs e)
+        //{
+        //    if (string.IsNullOrEmpty(txtID.Text))
+        //    {
+        //        MessageBox.Show("Informe o ID do cliente a ser Excluído");
+        //        return;
+        //    }
+        //    try
+        //    {
+        //        int codigo = Convert.ToInt32(txtID.Text);
+        //        DalHelper.Delete(codigo);
+        //        ExibirDados();
+        //        LimpaDados();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Erro : " + ex.Message);
+        //    }
+        //}
 
         private void btnLocalizarDados_Click(object sender, EventArgs e)
         {
@@ -245,15 +245,15 @@ namespace CShp_MAC
 
 
 
-        private void LimpaDados()
-        {
-            txtID.Text = "";
-            txtNumPlaca.Text = "";
-            txtCPFCondutor.Text = "";
-            //txtModelo.Text = "";
-            txtBoxByteString.Text = "";
-            data = null;
-        }
+        //private void LimpaDados()
+        //{
+        //    txtID.Text = "";
+        //    txtNumPlaca.Text = "";
+        //    txtCPFCondutor.Text = "";
+        //    //txtModelo.Text = "";
+        //    txtBoxByteString.Text = "";
+        //    data = null;
+        //}
 
         private void setCarsForInfraction(string cpf)
         {
@@ -269,62 +269,62 @@ namespace CShp_MAC
 
         private void dgvDados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = this.dgvDados.Rows[e.RowIndex];
-                txtID.Text = row.Cells["ID"].Value.ToString();
-                txtNumPlaca.Text = row.Cells["NUMERO"].Value.ToString();
-                txtCPFCondutor.Text = row.Cells["CPF"].Value.ToString();
-                //txtModelo.Text = row.Cells["MODELO"].Value.ToString();
+            //    if (e.RowIndex >= 0)
+            //    {
+            //        DataGridViewRow row = this.dgvDados.Rows[e.RowIndex];
+            //        txtID.Text = row.Cells["ID"].Value.ToString();
+            //        txtNumPlaca.Text = row.Cells["NUMERO"].Value.ToString();
+            //        txtCPFCondutor.Text = row.Cells["CPF"].Value.ToString();
+            //        //txtModelo.Text = row.Cells["MODELO"].Value.ToString();
 
-                txtReaderCPF.Text = row.Cells["CPF"].Value.ToString();
+            //        txtReaderCPF.Text = row.Cells["CPF"].Value.ToString();
 
-                //UPDATE Infraction List
-                setCarsForInfraction(row.Cells["CPF"].Value.ToString());
+            //        //UPDATE Infraction List
+            //        setCarsForInfraction(row.Cells["CPF"].Value.ToString());
 
-            }
+            //    }
 
 
-        }
+         }
 
-        private void btnPathToImage_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openPathBrowser = new OpenFileDialog();
-            openPathBrowser.RestoreDirectory = true;
-            openPathBrowser.DefaultExt = "jpg";
-            openPathBrowser.Filter = "image files (*.jpg)|*.jpg";
+            //private void btnPathToImage_Click(object sender, EventArgs e)
+            //{
+            //    OpenFileDialog openPathBrowser = new OpenFileDialog();
+            //    openPathBrowser.RestoreDirectory = true;
+            //    openPathBrowser.DefaultExt = "jpg";
+            //    openPathBrowser.Filter = "image files (*.jpg)|*.jpg";
 
-            if (openPathBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                string strfilename = openPathBrowser.FileName;
-                imageToBytes(strfilename);
-            }
-        }
+            //    if (openPathBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            //    {
+            //        string strfilename = openPathBrowser.FileName;
+            //        imageToBytes(strfilename);
+            //    }
+            //}
 
-        private void imageToBytes(string path)
-        {
-            
-            try
-            {
-                data = File.ReadAllBytes(path);
-                txtBoxByteString.Text = path;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                data = null;
-                txtBoxByteString.Text = "Erro de carregamento da imagem.";
-            }
+            //private void imageToBytes(string path)
+            //{
 
-        }
+            //    try
+            //    {
+            //        data = File.ReadAllBytes(path);
+            //        txtBoxByteString.Text = path;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Console.WriteLine(ex.ToString());
+            //        data = null;
+            //        txtBoxByteString.Text = "Erro de carregamento da imagem.";
+            //    }
 
-        private void btnRandomId_Click(object sender, EventArgs e)
-        {
-            LimpaDados();
-            //txtID.Text = DalHelper.generateRandomID().ToString();
-        }
+            //}
 
-        private void cbbInfracoesList_SelectedIndexChanged(object sender, EventArgs e)
+            //private void btnRandomId_Click(object sender, EventArgs e)
+            //{
+            //    LimpaDados();
+            //    //txtID.Text = DalHelper.generateRandomID().ToString();
+            //}
+
+            private void cbbInfracoesList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
@@ -339,5 +339,11 @@ namespace CShp_MAC
 
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form3 infractionMaintenanceForm = new Form3();
+
+            infractionMaintenanceForm.Show();
+        }
     }
 }

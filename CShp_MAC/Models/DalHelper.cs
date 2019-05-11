@@ -17,7 +17,7 @@ namespace csharp_Sqlite
         //Cria conexão
         private static SQLiteConnection DbConnection()
         {
-            sqliteConnection = new SQLiteConnection("Data Source=D:\\dados\\Cadastro.sqlite; Version=3;");
+     '       sqliteConnection = new SQLiteConnection("Data Source=D:\\dados\\Cadastro.sqlite; Version=3;");
             sqliteConnection.Open();
             return sqliteConnection;
         }
