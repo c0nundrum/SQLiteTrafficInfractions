@@ -4,6 +4,9 @@ using System.Data;
 using System.Data.SQLite;
 using CShp_MAC.Models;
 using System.Collections.Generic;
+using CShp_MAC;
+using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace csharp_Sqlite
 {
@@ -17,7 +20,7 @@ namespace csharp_Sqlite
         //Cria conexão
         private static SQLiteConnection DbConnection()
         {
-     '       sqliteConnection = new SQLiteConnection("Data Source=D:\\dados\\Cadastro.sqlite; Version=3;");
+            sqliteConnection = new SQLiteConnection("Data Source=D:\\dados\\Cadastro.sqlite; Version=3;");
             sqliteConnection.Open();
             return sqliteConnection;
         }
@@ -82,13 +85,124 @@ namespace csharp_Sqlite
                 using (var cmd = DbConnection().CreateCommand())
                 {
                     //cmd.CommandText = "CREATE TABLE IF NOT EXISTS Carros(ID INTEGER, PLACA BLOB, CPF TEXT, NUMERO TEXT, MODELO TEXT)";
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS CARRO(ID INT PRIMARY KEY, PLACA_NUMBER TEXT UNIQUE NOT NULL, PLACA BLOB, PROPRIETARIO_ID INT, FOREIGN KEY(PROPRIETARIO_ID) REFERENCES PROPRIETARIO(ID))";
+                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS CARRO(ID INT PRIMARY KEY AUTOINCREMENT, PLACA_NUMBER TEXT UNIQUE NOT NULL, PLACA BLOB, PROPRIETARIO_ID INT, FOREIGN KEY(PROPRIETARIO_ID) REFERENCES PROPRIETARIO(ID))";
 
                     cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+        }
+
+        public static void AddCarro(Placa placa)
+        {
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+                    string cmdString = "SELECT ID FROM PROPRIETARIO WHERE CPF = " + placa.donoCPF;
+                    string ownerId = getOwnerId(placa.donoCPF);
+
+                    while (string.IsNullOrEmpty(ownerId))
+                    {
+                        Form4 ownerForm = new Form4(placa.donoCPF);
+
+                        var result = ownerForm.ShowDialog();
+
+                        if (result == DialogResult.Cancel)
+                        {
+                            return;
+                        }
+
+                        ownerId = getOwnerId(placa.donoCPF);
+
+                    }
+
+                    cmd.CommandText = "INSERT INTO CARRO(PLACA_NUMBER, PLACA, PROPRIETARIO_ID ) values (@PLACA_NUMBER, @PLACA, @PROPRIETARIO_ID)";
+
+                    cmd.Parameters.AddWithValue("@PLACA_NUMBER", placa.placaNumero);
+                    cmd.Parameters.AddWithValue("@PLACA", placa.placaImg);
+                    cmd.Parameters.AddWithValue("@PROPRIETARIO_ID", ownerId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Excepted in AddCarro");
+                throw ex;
+            }
+        }
+
+        public static void deleteCarro(string RowId)
+        {
+            try
+            {
+                using (var cmd = new SQLiteCommand(DbConnection()))
+                {
+                    cmd.CommandText = "DELETE FROM CARRO Where ROWID=@ROWID";
+                    cmd.Parameters.AddWithValue("@ROWID", RowId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static string getOwnerId(string cpf)
+        {
+            
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+
+                    Debug.WriteLine("Procurando: " + cpf);
+
+                    cmd.CommandText = "SELECT ROWID FROM PROPRIETARIO WHERE CPF = @CPF";
+                    cmd.Parameters.AddWithValue("@CPF", cpf);
+
+                    object result = cmd.ExecuteScalar();
+
+                    Debug.WriteLine("Encontrado em: " + result);
+
+                    return (result == null ? "" : result.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                throw ex;
+            }
+        }
+
+        public static string getIdFromPlaca(string placa)
+        {
+
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+
+                    Debug.WriteLine("Procurando: " + placa);
+
+                    cmd.CommandText = "SELECT ROWID FROM CARRO WHERE PLACA_NUMBER = @PLACA_NUMBER";
+                    cmd.Parameters.AddWithValue("@PLACA_NUMBER", placa);
+
+                    object result = cmd.ExecuteScalar();
+
+                    Debug.WriteLine("Encontrado em: " + result);
+
+                    return (result == null ? "" : result.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Excepted in getIdFromPlaca");
                 throw ex;
             }
         }
@@ -100,7 +214,7 @@ namespace csharp_Sqlite
                 using (var cmd = DbConnection().CreateCommand())
                 {
 
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS PROPRIETARIO(ID INT PRIMARY KEY, CPF TEXT UNIQUE NOT NULL, NOME TEXT)";
+                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS PROPRIETARIO(ID INT PRIMARY KEY AUTOINCREMENT, CPF TEXT UNIQUE NOT NULL, NOME TEXT)";
 
                     cmd.ExecuteNonQuery();
 
@@ -114,13 +228,36 @@ namespace csharp_Sqlite
 
         }
 
+        public static void insertProprietario(string nome, string cpf)
+        {
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+
+                    cmd.CommandText = "INSERT INTO PROPRIETARIO(CPF, NOME) values (@CPF, @NOME)";
+
+                    cmd.Parameters.AddWithValue("@CPF", cpf);
+                    cmd.Parameters.AddWithValue("@NOME", nome);
+
+                    cmd.ExecuteNonQuery();
+
+                }
+              
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static void CriarTableInfracoesSQlite()
         {
             try
             {
                 using (var cmd = DbConnection().CreateCommand())
                 {
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS INFRACOES(ID INT PRIMARY KEY, PROPRIETARIO_ID INT, INFRACOES TEXT, DATA TEXT, CARRO_ID INT, FOREIGN KEY(PROPRIETARIO_ID) REFERENCES PROPRIETARIO(ID), FOREIGN KEY(CARRO_ID) REFERENCES CARRO(ID))";
+                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS INFRACOES(ID INT PRIMARY KEY AUTOINCREMENT, PROPRIETARIO_ID INT, INFRACOES TEXT, DATA TEXT, CARRO_ID INT, FOREIGN KEY(PROPRIETARIO_ID) REFERENCES PROPRIETARIO(ID), FOREIGN KEY(CARRO_ID) REFERENCES CARRO(ID))";
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -160,7 +297,7 @@ namespace csharp_Sqlite
             {
                 using (var cmd = DbConnection().CreateCommand())
                 {
-                    cmd.CommandText = "SELECT PLACA_NUMBER, PLACA, CPF FROM CARRO INNER JOIN PROPRIETARIO ON CARRO.PROPRIETARIO_ID = PROPRIETARIO.ID";
+                    cmd.CommandText = "SELECT PLACA_NUMBER, PLACA, CPF, NOME FROM CARRO INNER JOIN PROPRIETARIO ON CARRO.PROPRIETARIO_ID = PROPRIETARIO.ROWID";
                     da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
                     da.Fill(dt);
                     return dt;
@@ -338,26 +475,7 @@ namespace csharp_Sqlite
             }
         }
 
-        public static void AddCarro(Placa placa)
-        {
-            try
-            {
-                using (var cmd = DbConnection().CreateCommand())
-                {
-                    cmd.CommandText = "INSERT INTO Carros(ID, PLACA, CPF, NUMERO, MODELO ) values (@ID, @PLACA, @CPF, @NUMERO, @MODELO)";
-                    cmd.Parameters.AddWithValue("@ID", placa.ID);
-                    cmd.Parameters.AddWithValue("@PLACA", placa.placaImg);
-                    cmd.Parameters.AddWithValue("@CPF", placa.donoCPF);
-                    cmd.Parameters.AddWithValue("@NUMERO", placa.placaNumero);
-                    cmd.Parameters.AddWithValue("@MODELO", placa.modelo);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+
 
         public static void Add(Cliente cliente)
         {
@@ -377,43 +495,28 @@ namespace csharp_Sqlite
                 throw ex;
             }
         }
-        public static void Update(Placa placa)
-        {
-            try
-            {
-                using (var cmd = new SQLiteCommand(DbConnection()))
-                {
-                    if (placa.ID != null)
-                    {
-                        cmd.CommandText = "UPDATE Carros SET CPF=@CPF, NUMERO=@NUMERO, MODELO=@MODELO WHERE ID=@ID";
-                        cmd.Parameters.AddWithValue("@ID", placa.ID);
-                        cmd.Parameters.AddWithValue("@CPF", placa.donoCPF);
-                        cmd.Parameters.AddWithValue("@NUMERO", placa.placaNumero);
-                        cmd.Parameters.AddWithValue("@MODELO", placa.modelo);
-                        cmd.ExecuteNonQuery();
-                    }
-                };
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public static void Delete(int Id)
-        {
-            try
-            {
-                using (var cmd = new SQLiteCommand(DbConnection()))
-                {
-                    cmd.CommandText = "DELETE FROM Carros Where Id=@ID";
-                    cmd.Parameters.AddWithValue("@ID", Id);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //public static void Update(Placa placa)
+        //{
+        //    try
+        //    {
+        //        using (var cmd = new SQLiteCommand(DbConnection()))
+        //        {
+        //            if (placa.ID != null)
+        //            {
+        //                cmd.CommandText = "UPDATE Carros SET CPF=@CPF, NUMERO=@NUMERO, MODELO=@MODELO WHERE ID=@ID";
+        //                cmd.Parameters.AddWithValue("@ID", placa.ID);
+        //                cmd.Parameters.AddWithValue("@CPF", placa.donoCPF);
+        //                cmd.Parameters.AddWithValue("@NUMERO", placa.placaNumero);
+        //                cmd.Parameters.AddWithValue("@MODELO", placa.modelo);
+        //                cmd.ExecuteNonQuery();
+        //            }
+        //        };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+       
     }
 }

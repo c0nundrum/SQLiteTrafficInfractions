@@ -91,6 +91,7 @@
             this.buscarImagem.TabIndex = 6;
             this.buscarImagem.Text = "Buscar Imagem";
             this.buscarImagem.UseVisualStyleBackColor = true;
+            this.buscarImagem.Click += new System.EventHandler(this.buscarImagem_Click);
             // 
             // adicionarEntrada
             // 
@@ -121,6 +122,7 @@
             this.excluirButton.TabIndex = 9;
             this.excluirButton.Text = "Excluir";
             this.excluirButton.UseVisualStyleBackColor = true;
+            this.excluirButton.Click += new System.EventHandler(this.excluirButton_Click);
             // 
             // Form2
             // 
@@ -138,6 +140,7 @@
             this.Controls.Add(this.numeroPlaca);
             this.Name = "Form2";
             this.Text = "Form2";
+            this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

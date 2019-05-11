@@ -11,12 +11,8 @@ namespace CShp_MAC
     public partial class Form1 : Form
     {
 
-        byte[] data = null;
-
         string placaSelecionada = "";
         string cpfSelecionado = "";
-
-        
 
         public Form1()
         {
@@ -53,20 +49,8 @@ namespace CShp_MAC
             "Dirigir ameaçando os pedestres ou os demais veículos", "Realizar manobra perigosa",
             "Condutor envolvido em acidente que deixar de prestar socorro"};
 
-            cbbInfracoesList.Items.AddRange(infracoes);
+            //cbbInfracoesList.Items.AddRange(infracoes);
         }
-
-        //private bool Valida()
-        //{
-        //    if (string.IsNullOrEmpty(txtID.Text) && string.IsNullOrEmpty(txtNumPlaca.Text) && string.IsNullOrEmpty(txtCPFCondutor.Text) && data == null)
-        //    {
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        return true;
-        //    }
-        //}
 
 
         //Metodos de conexão
@@ -257,14 +241,14 @@ namespace CShp_MAC
 
         private void setCarsForInfraction(string cpf)
         {
-            cbbCarrosFromCPF.Items.Clear();
+            //cbbCarrosFromCPF.Items.Clear();
 
-            List<string> carList = new List<string>();
+            //List<string> carList = new List<string>();
             //carList = DalHelper.getCarsFromCPF(cpf);
 
-            string[] carListArray = carList.ToArray();
+            //string[] carListArray = carList.ToArray();
 
-            cbbCarrosFromCPF.Items.AddRange(carListArray);
+            //cbbCarrosFromCPF.Items.AddRange(carListArray);
         }
 
         private void dgvDados_CellContentClick(object sender, DataGridViewCellEventArgs e)

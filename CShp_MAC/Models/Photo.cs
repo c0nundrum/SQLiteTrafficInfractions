@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace CShp_MAC.Models
 {
-    public class Placa
+    public class Photo
     {
-        public byte[] placaImg { get; set; }
-        public string donoCPF { get; set; }
-        public string placaNumero { get; set; }
-
+    
     }
 }

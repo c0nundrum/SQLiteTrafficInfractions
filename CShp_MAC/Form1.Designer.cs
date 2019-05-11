@@ -41,10 +41,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.nomeProprietarioTxt = new System.Windows.Forms.TextBox();
-            this.cpfTxt = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInfracoes)).BeginInit();
@@ -53,10 +49,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.cpfTxt);
-            this.panel1.Controls.Add(this.nomeProprietarioTxt);
-            this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.manterVeiculo);
             this.panel1.Controls.Add(this.btnLocalizarDados);
             this.panel1.Controls.Add(this.txtCPFCondutor);
@@ -66,7 +58,7 @@
             this.panel1.Controls.Add(this.EmailLbl);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(776, 327);
+            this.panel1.Size = new System.Drawing.Size(776, 261);
             this.panel1.TabIndex = 0;
             // 
             // manterVeiculo
@@ -145,7 +137,7 @@
             this.panel3.Controls.Add(this.dgvInfracoes);
             this.panel3.Location = new System.Drawing.Point(794, 12);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(535, 327);
+            this.panel3.Size = new System.Drawing.Size(535, 261);
             this.panel3.TabIndex = 3;
             // 
             // button3
@@ -163,43 +155,11 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(88, 252);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 13);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "Nome do proprietario:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(88, 288);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(97, 13);
-            this.label9.TabIndex = 21;
-            this.label9.Text = "Cpf do Proprietario:";
-            // 
-            // nomeProprietarioTxt
-            // 
-            this.nomeProprietarioTxt.Location = new System.Drawing.Point(202, 249);
-            this.nomeProprietarioTxt.Name = "nomeProprietarioTxt";
-            this.nomeProprietarioTxt.Size = new System.Drawing.Size(252, 20);
-            this.nomeProprietarioTxt.TabIndex = 22;
-            // 
-            // cpfTxt
-            // 
-            this.cpfTxt.Location = new System.Drawing.Point(202, 285);
-            this.cpfTxt.Name = "cpfTxt";
-            this.cpfTxt.Size = new System.Drawing.Size(252, 20);
-            this.cpfTxt.TabIndex = 23;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1345, 352);
+            this.ClientSize = new System.Drawing.Size(1345, 287);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
@@ -227,10 +187,6 @@
         private System.Windows.Forms.Button manterVeiculo;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox cpfTxt;
-        private System.Windows.Forms.TextBox nomeProprietarioTxt;
     }
 }
 
