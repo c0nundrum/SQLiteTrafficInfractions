@@ -14,7 +14,7 @@ namespace CShp_MAC
 {
     public partial class Form3 : Form
     {
-        public Form3(string carroPlaca, string cpfCondutor)
+        public Form3(string carroPlaca, string cpfCondutor, string dataSelecionada, string infracaoSelecionada)
         {
             
             InitializeComponent();
@@ -26,6 +26,9 @@ namespace CShp_MAC
 
             carroTxtBox.Text = carroPlaca;
             cpfTextBox.Text = cpfCondutor;
+
+            infracaoData.Text = dataSelecionada;
+            infracoesCBB.Text = infracaoSelecionada;
 
         }
 
@@ -92,6 +95,7 @@ namespace CShp_MAC
                 infracao.infracao = infracaoSelecionada;
 
                 DalHelper.insertInfracoes(infracao);
+                this.Close();
 
             } else
             {
@@ -100,6 +104,26 @@ namespace CShp_MAC
             }
 
 
+        }
+
+        private void excluirBtn_Click(object sender, EventArgs e)
+        {
+            //Retorna o ROWID para a exclusão
+            string infracaoID = DalHelper.getIdFromInfraction(infracoesCBB.Text, infracaoData.Text, cpfTextBox.Text);
+
+            //Se não retornar vazio
+            if (!string.IsNullOrEmpty(infracaoID))
+            {
+                DalHelper.deleteInfracao(infracaoID);
+                this.Close();
+
+            }
+            else
+            {
+                //Caso retorne vazio mostra a mensagem de eroo
+                MessageBox.Show("Infracao não encontrada", "Erro",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

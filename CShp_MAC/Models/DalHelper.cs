@@ -156,6 +156,23 @@ namespace csharp_Sqlite
             }
         }
 
+        public static void deleteInfracao(string RowId)
+        {
+            try
+            {
+                using (var cmd = new SQLiteCommand(DbConnection()))
+                {
+                    cmd.CommandText = "DELETE FROM INFRACOES Where ROWID=@ROWID";
+                    cmd.Parameters.AddWithValue("@ROWID", RowId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static string getOwnerId(string cpf)
         {
             
@@ -195,6 +212,37 @@ namespace csharp_Sqlite
 
                     cmd.CommandText = "SELECT ROWID FROM CARRO WHERE PLACA_NUMBER = @PLACA_NUMBER";
                     cmd.Parameters.AddWithValue("@PLACA_NUMBER", placa);
+
+                    object result = cmd.ExecuteScalar();
+
+                    Debug.WriteLine("Encontrado em: " + result);
+
+                    return (result == null ? "" : result.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Excepted in getIdFromPlaca");
+                throw ex;
+            }
+        }
+
+        public static string getIdFromInfraction(string infracoes, string data, string cpf)
+        {
+
+            string proprietario_ID = getOwnerId(cpf);
+
+
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+
+
+                    cmd.CommandText = "SELECT ROWID FROM INFRACOES WHERE INFRACOES = @INFRACOES AND DATA = @DATA AND PROPRIETARIO_ID = @PROPRIETARIO_ID";
+                    cmd.Parameters.AddWithValue("@INFRACOES", infracoes);
+                    cmd.Parameters.AddWithValue("@DATA", data);
+                    cmd.Parameters.AddWithValue("@PROPRIETARIO_ID", proprietario_ID);
 
                     object result = cmd.ExecuteScalar();
 

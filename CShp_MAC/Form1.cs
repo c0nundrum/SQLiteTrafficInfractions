@@ -14,6 +14,8 @@ namespace CShp_MAC
 
         string placaSelecionada = "";
         string cpfSelecionado = "";
+        string dataSelecionada = "";
+        string infracaoSelecionada = "";
 
         public Form1()
         {
@@ -340,7 +342,9 @@ namespace CShp_MAC
                 Debug.WriteLine(cpfSelecionado);
 
                 //UPDATE Infraction List
-                //setCarsForInfraction(row.Cells["CPF"].Value.ToString());
+                DataTable dt = new DataTable();
+                dt = DalHelper.filtraPlacasInfracoes(placaSelecionada);
+                dgvInfracoes.DataSource = dt;
 
             }
 
@@ -348,7 +352,7 @@ namespace CShp_MAC
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Form3 infractionMaintenanceForm = new Form3(placaSelecionada, cpfSelecionado);
+            Form3 infractionMaintenanceForm = new Form3(placaSelecionada, cpfSelecionado, dataSelecionada, infracaoSelecionada);
 
             infractionMaintenanceForm.Show();
         }
@@ -388,6 +392,24 @@ namespace CShp_MAC
 
             }
 
+        }
+
+        private void dgvInfracoes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dgvInfracoes.Rows[e.RowIndex];
+
+                dataSelecionada = row.Cells["DATA"].Value.ToString();
+                infracaoSelecionada = row.Cells["INFRACOES"].Value.ToString();
+
+                Debug.WriteLine(dataSelecionada);
+                Debug.WriteLine(infracaoSelecionada);
+
+                //UPDATE Infraction List
+                //setCarsForInfraction(row.Cells["CPF"].Value.ToString());
+
+            }
         }
     }
 }

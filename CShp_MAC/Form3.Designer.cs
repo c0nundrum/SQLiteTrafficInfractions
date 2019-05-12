@@ -95,6 +95,7 @@
             this.excluirBtn.TabIndex = 5;
             this.excluirBtn.Text = "Excluir";
             this.excluirBtn.UseVisualStyleBackColor = true;
+            this.excluirBtn.Click += new System.EventHandler(this.excluirBtn_Click);
             // 
             // infracoesCBB
             // 
