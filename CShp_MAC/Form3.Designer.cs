@@ -123,6 +123,7 @@
             // 
             // infracaoData
             // 
+            this.infracaoData.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.infracaoData.Location = new System.Drawing.Point(126, 132);
             this.infracaoData.Name = "infracaoData";
             this.infracaoData.Size = new System.Drawing.Size(205, 20);

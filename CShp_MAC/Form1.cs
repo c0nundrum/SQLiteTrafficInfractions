@@ -191,6 +191,17 @@ namespace CShp_MAC
             } else if (string.IsNullOrEmpty(txtNumPlaca.Text) && !string.IsNullOrEmpty(txtCPFCondutor.Text))
             {
 
+                DataTable dt = new DataTable();
+                dt = DalHelper.filtraCPFCarros(txtCPFCondutor.Text);
+                dgvDados.DataSource = dt;
+
+            } else if (!string.IsNullOrEmpty(txtNumPlaca.Text) && !string.IsNullOrEmpty(txtCPFCondutor.Text))
+            {
+
+                DataTable dt = new DataTable();
+                dt = DalHelper.filtraCPFPlacasCarros(txtNumPlaca.Text, txtCPFCondutor.Text);
+                dgvDados.DataSource = dt;
+
             }
 
 
@@ -206,13 +217,13 @@ namespace CShp_MAC
             //    //int codigo = Convert.ToInt32(txtID.Text);
             //    string codigo = txtEmail.Text;
 
-                //    dt = DalHelper.GetCarro(codigo);
-                //    dgvDados.DataSource = dt;
-                //}
-                //catch (Exception ex)
-                //{
-                //    MessageBox.Show("Erro : " + ex.Message);
-                //}
+            //    dt = DalHelper.GetCarro(codigo);
+            //    dgvDados.DataSource = dt;
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Erro : " + ex.Message);
+            //}
         }
 
         private void btnEncerrar_Click(object sender, EventArgs e)

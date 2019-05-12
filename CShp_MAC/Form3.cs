@@ -21,9 +21,28 @@ namespace CShp_MAC
 
             setUpInfracoesLista();
 
+            infracaoData.Format = DateTimePickerFormat.Custom;
+            infracaoData.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+
             carroTxtBox.Text = carroPlaca;
             cpfTextBox.Text = cpfCondutor;
 
+        }
+
+        private bool valida(string infracaoSelecionada)
+        {
+            if (!string.IsNullOrEmpty(cpfTextBox.Text) && !string.IsNullOrEmpty(carroTxtBox.Text) && !string.IsNullOrEmpty(infracaoData.Text) && !string.IsNullOrEmpty(infracaoSelecionada))
+            {
+
+                return true;
+
+            }
+            else
+            {
+
+                return false;
+
+            }
         }
 
         private void setUpInfracoesLista()
@@ -49,18 +68,37 @@ namespace CShp_MAC
 
         private void atualizarBtn_Click(object sender, EventArgs e)
         {
-            string infracaoSelecionada = infracoesCBB.Items[infracoesCBB.SelectedIndex].ToString();
+            string infracaoSelecionada = "";
 
-            Infracao infracao = new Infracao();
+            try
+            {
+                infracaoSelecionada = infracoesCBB.Items[infracoesCBB.SelectedIndex].ToString();
+            }
+            catch (Exception)
+            {
 
-            infracao.cpfNumero = cpfTextBox.Text;
-            infracao.placaNumero = carroTxtBox.Text;
-            infracao.data = infracaoData.Text;
-            infracao.infracao = infracaoSelecionada;
+                MessageBox.Show("Por favor, forneça todas as informações", "Erro",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            DalHelper.insertInfracoes(infracao);
-            
-            //TODO: VALIDA DADOS INFRACOES E DATA, FAZER METODOS DE PESQUISA NO FORM1, FAZER METODOS DE UPDATE AQUI E NO UPDATE CARROS
+            if (valida(infracaoSelecionada))
+            {
+                Infracao infracao = new Infracao();
+
+                infracao.cpfNumero = cpfTextBox.Text;
+                infracao.placaNumero = carroTxtBox.Text;
+                infracao.data = infracaoData.Text;
+                infracao.infracao = infracaoSelecionada;
+
+                DalHelper.insertInfracoes(infracao);
+
+            } else
+            {
+                MessageBox.Show("Por favor, forneça todas as informações", "Erro",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
 
         }
     }
