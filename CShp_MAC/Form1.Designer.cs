@@ -41,6 +41,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.filtrarInfracoesBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInfracoes)).BeginInit();
@@ -77,7 +78,7 @@
             this.btnLocalizarDados.Name = "btnLocalizarDados";
             this.btnLocalizarDados.Size = new System.Drawing.Size(188, 23);
             this.btnLocalizarDados.TabIndex = 6;
-            this.btnLocalizarDados.Text = "Filtrar";
+            this.btnLocalizarDados.Text = "Filtrar Carros";
             this.btnLocalizarDados.UseVisualStyleBackColor = true;
             this.btnLocalizarDados.Click += new System.EventHandler(this.btnLocalizarDados_Click);
             // 
@@ -135,6 +136,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.filtrarInfracoesBtn);
             this.panel3.Controls.Add(this.button3);
             this.panel3.Controls.Add(this.dgvInfracoes);
             this.panel3.Location = new System.Drawing.Point(794, 12);
@@ -156,6 +158,16 @@
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // filtrarInfracoesBtn
+            // 
+            this.filtrarInfracoesBtn.Location = new System.Drawing.Point(186, 16);
+            this.filtrarInfracoesBtn.Name = "filtrarInfracoesBtn";
+            this.filtrarInfracoesBtn.Size = new System.Drawing.Size(188, 23);
+            this.filtrarInfracoesBtn.TabIndex = 20;
+            this.filtrarInfracoesBtn.Text = "Filtrar Infracoes";
+            this.filtrarInfracoesBtn.UseVisualStyleBackColor = true;
+            this.filtrarInfracoesBtn.Click += new System.EventHandler(this.filtrarInfracoesBtn_Click);
             // 
             // Form1
             // 
@@ -189,6 +201,7 @@
         private System.Windows.Forms.Button manterVeiculo;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Button filtrarInfracoesBtn;
     }
 }
 

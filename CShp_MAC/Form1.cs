@@ -352,5 +352,42 @@ namespace CShp_MAC
 
             infractionMaintenanceForm.Show();
         }
+
+        private void filtrarInfracoesBtn_Click(object sender, EventArgs e)
+        {
+
+            if (string.IsNullOrEmpty(txtNumPlaca.Text) && string.IsNullOrEmpty(txtCPFCondutor.Text))
+            {
+
+                //Exibe todos os Dados se não houver digitado
+                ExibirDados();
+
+            }
+            else if (!string.IsNullOrEmpty(txtNumPlaca.Text) && string.IsNullOrEmpty(txtCPFCondutor.Text))
+            {
+
+                DataTable dt = new DataTable();
+                dt = DalHelper.filtraPlacasInfracoes(txtNumPlaca.Text);
+                dgvInfracoes.DataSource = dt;
+
+            }
+            else if (string.IsNullOrEmpty(txtNumPlaca.Text) && !string.IsNullOrEmpty(txtCPFCondutor.Text))
+            {
+
+                DataTable dt = new DataTable();
+                dt = DalHelper.filtraCPFInfracoes(txtCPFCondutor.Text);
+                dgvInfracoes.DataSource = dt;
+
+            }
+            else if (!string.IsNullOrEmpty(txtNumPlaca.Text) && !string.IsNullOrEmpty(txtCPFCondutor.Text))
+            {
+
+                DataTable dt = new DataTable();
+                dt = DalHelper.filtraCPFPlacasInfracoes(txtNumPlaca.Text, txtCPFCondutor.Text);
+                dgvInfracoes.DataSource = dt;
+
+            }
+
+        }
     }
 }
