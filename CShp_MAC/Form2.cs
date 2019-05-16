@@ -71,6 +71,7 @@ namespace CShp_MAC
                     if (string.IsNullOrEmpty(carro.ROWID)){
 
                         carro.InsertCarro();
+                        this.Close();
 
                     } else
                     {

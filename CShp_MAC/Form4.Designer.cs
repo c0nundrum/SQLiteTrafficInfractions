@@ -47,6 +47,7 @@
             // 
             // cpfBox
             // 
+            this.cpfBox.Enabled = false;
             this.cpfBox.Location = new System.Drawing.Point(93, 59);
             this.cpfBox.Name = "cpfBox";
             this.cpfBox.Size = new System.Drawing.Size(155, 20);

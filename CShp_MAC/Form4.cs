@@ -28,7 +28,8 @@ namespace CShp_MAC
 
         private bool valida()
         {
-            if (!string.IsNullOrEmpty(nomeTxtBox.Text) && !string.IsNullOrEmpty(cpfBox.Text))
+            //if (!string.IsNullOrEmpty(nomeTxtBox.Text) && !string.IsNullOrEmpty(cpfBox.Text))
+            if (!string.IsNullOrEmpty(cpfBox.Text))
             {
 
                 return true;
