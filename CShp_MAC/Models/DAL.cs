@@ -1,24 +1,18 @@
-﻿using csharp_Sqlite.Models;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SQLite;
-using CShp_MAC.Models;
-using System.Collections.Generic;
-using CShp_MAC;
-using System.Windows.Forms;
 using System.Diagnostics;
 
-namespace csharp_Sqlite
+namespace CShp_MAC.Models
 {
-    public class DalHelper
+    class DAL
     {
-        private static SQLiteConnection sqliteConnection;
 
-        public DalHelper()
-        { }
+        //inicia o Parâmetro da conexão
+        protected static SQLiteConnection sqliteConnection;
 
         //Cria conexão
-        private static SQLiteConnection DbConnection()
+        protected static SQLiteConnection DbConnection()
         {
             sqliteConnection = new SQLiteConnection("Data Source=D:\\dados\\Cadastro.sqlite; Version=3;");
             sqliteConnection.Open();
@@ -57,58 +51,34 @@ namespace csharp_Sqlite
             }
         }
 
-        //THIS GOES TO THE NEW CHILD METHOD
-        public static void AddCarro(Placa placa)
+        public static void CriarTableProprietarioSQlite()
         {
             try
             {
                 using (var cmd = DbConnection().CreateCommand())
                 {
 
-                    string ownerId = getOwnerId(placa.donoCPF);
-
-
-                    while (string.IsNullOrEmpty(ownerId))
-                    {
-                        Form4 ownerForm = new Form4(placa.donoCPF);
-
-                        var result = ownerForm.ShowDialog();
-
-                        if (result == DialogResult.Cancel)
-                        {
-                            return;
-                        }
-
-                        ownerId = getOwnerId(placa.donoCPF);
-
-                    }
-
-
-                    cmd.CommandText = "INSERT OR REPLACE INTO CARRO(PLACA_NUMBER, PLACA, PROPRIETARIO_ID ) values (@PLACA_NUMBER, @PLACA, @PROPRIETARIO_ID)";
-
-                    cmd.Parameters.AddWithValue("@PLACA_NUMBER", placa.placaNumero);
-                    cmd.Parameters.AddWithValue("@PLACA", placa.placaImg);
-                    cmd.Parameters.AddWithValue("@PROPRIETARIO_ID", ownerId);
+                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS PROPRIETARIO(ID INTEGER PRIMARY KEY AUTOINCREMENT, CPF TEXT UNIQUE NOT NULL, NOME TEXT)";
 
                     cmd.ExecuteNonQuery();
+
                 }
             }
+
             catch (Exception ex)
             {
-                Debug.WriteLine("Excepted in AddCarro");
                 throw ex;
             }
+
         }
 
-        //THIS GOES TO THE NEW CHILD METHOD
-        public static void deleteCarro(string RowId)
+        public static void CriarTableInfracoesSQlite()
         {
             try
             {
-                using (var cmd = new SQLiteCommand(DbConnection()))
+                using (var cmd = DbConnection().CreateCommand())
                 {
-                    cmd.CommandText = "DELETE FROM CARRO Where ROWID=@ROWID";
-                    cmd.Parameters.AddWithValue("@ROWID", RowId);
+                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS INFRACOES(ID INTEGER PRIMARY KEY AUTOINCREMENT, PROPRIETARIO_ID INT, CARRO_ID INT, INFRACOES TEXT NOT NULL, DATA TEXT NOT NULL, UNIQUE (INFRACOES, DATA, PROPRIETARIO_ID) , FOREIGN KEY(PROPRIETARIO_ID) REFERENCES PROPRIETARIO(ID), FOREIGN KEY(CARRO_ID) REFERENCES CARRO(ID))";
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -118,27 +88,10 @@ namespace csharp_Sqlite
             }
         }
 
-        //THIS GOES TO THE NEW CHILD METHOD
-        public static void deleteInfracao(string RowId)
-        {
-            try
-            {
-                using (var cmd = new SQLiteCommand(DbConnection()))
-                {
-                    cmd.CommandText = "DELETE FROM INFRACOES Where ROWID=@ROWID";
-                    cmd.Parameters.AddWithValue("@ROWID", RowId);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
+        //Metodos para encontro dos IDS de tabelas
         public static string getOwnerId(string cpf)
         {
-            
+
             try
             {
                 using (var cmd = DbConnection().CreateCommand())
@@ -163,7 +116,7 @@ namespace csharp_Sqlite
             }
         }
 
-        public static string getIdFromPlaca(string placa)
+        public static string getIdFromCar(string placa)
         {
 
             try
@@ -221,113 +174,7 @@ namespace csharp_Sqlite
             }
         }
 
-        public static void CriarTableProprietarioSQlite()
-        {
-            try
-            {
-                using (var cmd = DbConnection().CreateCommand())
-                {
-
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS PROPRIETARIO(ID INTEGER PRIMARY KEY AUTOINCREMENT, CPF TEXT UNIQUE NOT NULL, NOME TEXT)";
-
-                    cmd.ExecuteNonQuery();
-
-                }
-            }
-
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-        }
-
-        //THIS GOES TO THE NEW CHILD METHOD
-        public static void insertProprietario(string nome, string cpf)
-        {
-            try
-            {
-                using (var cmd = DbConnection().CreateCommand())
-                {
-
-                    cmd.CommandText = "INSERT INTO PROPRIETARIO(CPF, NOME) values (@CPF, @NOME)";
-
-                    cmd.Parameters.AddWithValue("@CPF", cpf);
-                    cmd.Parameters.AddWithValue("@NOME", nome);
-
-                    cmd.ExecuteNonQuery();
-
-                }
-              
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public static void CriarTableInfracoesSQlite()
-        {
-            try
-            {
-                using (var cmd = DbConnection().CreateCommand())
-                {
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS INFRACOES(ID INTEGER PRIMARY KEY AUTOINCREMENT, PROPRIETARIO_ID INT, CARRO_ID INT, INFRACOES TEXT NOT NULL, DATA TEXT NOT NULL, UNIQUE (INFRACOES, DATA, PROPRIETARIO_ID) , FOREIGN KEY(PROPRIETARIO_ID) REFERENCES PROPRIETARIO(ID), FOREIGN KEY(CARRO_ID) REFERENCES CARRO(ID))";
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        //THIS GOES TO THE NEW CHILD METHOD
-        public static void insertInfracoes(Infracao infracao)
-        {
-
-            try
-            {
-                using (var cmd = DbConnection().CreateCommand())
-                {
-
-                    string ownerId = getOwnerId(infracao.cpfNumero);
-                    string carId = getIdFromPlaca(infracao.placaNumero);
-
-                    while (string.IsNullOrEmpty(ownerId))
-                    {
-                        Form4 ownerForm = new Form4(infracao.cpfNumero);
-
-                        var result = ownerForm.ShowDialog();
-
-                        if (result == DialogResult.Cancel)
-                        {
-                            return;
-                        }
-
-                        ownerId = getOwnerId(infracao.cpfNumero);
-
-                    }
-
-                    cmd.CommandText = "INSERT OR REPLACE INTO INFRACOES(PROPRIETARIO_ID, INFRACOES, DATA, CARRO_ID ) values (@PROPRIETARIO_ID, @INFRACOES, @DATA, @CARRO_ID)";
-
-                    cmd.Parameters.AddWithValue("@PROPRIETARIO_ID", ownerId);
-                    cmd.Parameters.AddWithValue("@INFRACOES", infracao.infracao);
-                    cmd.Parameters.AddWithValue("@DATA", infracao.data);
-                    cmd.Parameters.AddWithValue("@CARRO_ID", carId);
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Excepted in AddCarro");
-                throw ex;
-            }
-
-        }
-
-        //Table Populating methods
+        //Metodos para popular a tabela
         public static DataTable populateInfracoesTable()
         {
             SQLiteDataAdapter da = null;

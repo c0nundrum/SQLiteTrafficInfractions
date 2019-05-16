@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
-using csharp_Sqlite;
 
 namespace CShp_MAC
 {
@@ -56,12 +49,9 @@ namespace CShp_MAC
             {
                 if (valida())
                 {
-                    Models.Placa placa = new Models.Placa();
-                    placa.placaImg = data;
-                    placa.donoCPF = cpfProprietario.Text;
-                    placa.placaNumero = numeroPlaca.Text;
 
-                    DalHelper.AddCarro(placa);
+                    Models.ECarro carro = new Models.ECarro(data, cpfProprietario.Text, numeroPlaca.Text);
+                    carro.InsertCarro();
 
                     this.Close();
 
@@ -131,21 +121,10 @@ namespace CShp_MAC
 
         private void excluirButton_Click(object sender, EventArgs e)
         {
-            //Retorna o ROWID para a exclusão
-            string placaId = DalHelper.getIdFromPlaca(numeroPlaca.Text);
 
-            //Se não retornar vazio
-            if (!string.IsNullOrEmpty(placaId))
-            {
-                DalHelper.deleteCarro(placaId);
-                this.Close();
-
-            } else
-            {
-                //Caso retorne vazio mostra a mensagem de eroo
-                MessageBox.Show("Carro não encontrado", "Erro",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+               Models.ECarro.DeleteRow(numeroPlaca.Text);
+               this.Close();
+        
         }
     }
 }

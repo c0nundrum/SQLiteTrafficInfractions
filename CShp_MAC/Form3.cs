@@ -1,13 +1,6 @@
 ﻿using csharp_Sqlite;
 using CShp_MAC.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CShp_MAC
@@ -87,14 +80,17 @@ namespace CShp_MAC
 
             if (valida(infracaoSelecionada))
             {
-                Infracao infracao = new Infracao();
+                //Infracao infracao = new Infracao();
 
-                infracao.cpfNumero = cpfTextBox.Text;
-                infracao.placaNumero = carroTxtBox.Text;
-                infracao.data = infracaoData.Text;
-                infracao.infracao = infracaoSelecionada;
+                //infracao.cpfNumero = cpfTextBox.Text;
+                //infracao.placaNumero = carroTxtBox.Text;
+                //infracao.data = infracaoData.Text;
+                //infracao.infracao = infracaoSelecionada;
 
-                DalHelper.insertInfracoes(infracao);
+                //DalHelper.insertInfracoes(infracao);
+
+                EInfracao infracao = new EInfracao(infracaoSelecionada, infracaoData.Text, carroTxtBox.Text, cpfTextBox.Text);
+                infracao.InsertInfracao();
                 this.Close();
 
             } else
@@ -108,22 +104,10 @@ namespace CShp_MAC
 
         private void excluirBtn_Click(object sender, EventArgs e)
         {
-            //Retorna o ROWID para a exclusão
-            string infracaoID = DalHelper.getIdFromInfraction(infracoesCBB.Text, infracaoData.Text, cpfTextBox.Text);
 
-            //Se não retornar vazio
-            if (!string.IsNullOrEmpty(infracaoID))
-            {
-                DalHelper.deleteInfracao(infracaoID);
+                EInfracao.DeleteRow(infracoesCBB.Text, infracaoData.Text, cpfTextBox.Text);
                 this.Close();
 
-            }
-            else
-            {
-                //Caso retorne vazio mostra a mensagem de eroo
-                MessageBox.Show("Infracao não encontrada", "Erro",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
     }
 }

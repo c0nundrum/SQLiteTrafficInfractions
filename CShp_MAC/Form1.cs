@@ -19,13 +19,11 @@ namespace CShp_MAC
 
         public Form1()
         {
+
             InitializeComponent();
 
             //Cria o banco e tabelas se não encontrados
             createDatabaseFile();
-
-            //Cria lista de infracoes
-            setUpInfracoesLista();
 
         }
 
@@ -44,17 +42,6 @@ namespace CShp_MAC
         {
 
         }
-
-        private void setUpInfracoesLista()
-        {
-            string[] infracoes = new string[]{"Dirigir veículo sem possuir CNH", "Dirigir veículo com CNH cassada",
-            "Dirigir sob influência de álcool", "Recusar o teste do bafômetro", "Entregar direção a pessoa habilitada sem condições de dirigir",
-            "Dirigir ameaçando os pedestres ou os demais veículos", "Realizar manobra perigosa",
-            "Condutor envolvido em acidente que deixar de prestar socorro"};
-
-            //cbbInfracoesList.Items.AddRange(infracoes);
-        }
-
 
         //Metodos de conexão
 
@@ -101,79 +88,6 @@ namespace CShp_MAC
             }
         }
 
-        //private void btnIncluirDados_Click(object sender, EventArgs e)
-        //{
-        //    if (!Valida())
-        //    {
-            //    MessageBox.Show("Informe os dados cliente a incluir");
-            //    return;
-            //}
-            //try
-            //{
-            //    Placa placa = new Placa();
-            //    placa.ID = Convert.ToInt32(txtID.Text);
-            //    placa.placaImg = data;
-            //    //placa.modelo = txtModelo.Text;
-            //    placa.donoCPF = txtCPFCondutor.Text;
-            //    placa.placaNumero = txtNumPlaca.Text;
-
-        //        DalHelper.AddCarro(placa); 
-
-        //        ExibirDados();
-        //        LimpaDados();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Erro : " + ex.Message);
-        //    }
-        //}
-
-        //private void btnAtualizarDados_Click(object sender, EventArgs e)
-        //{
-        //    if (!Valida())
-        //    {
-        //        MessageBox.Show("Informe os dados cliente a atualizar");
-        //        return;
-        //    }
-
-        //    try
-        //    {
-        //        Placa placa = new Placa();
-        //        placa.ID = Convert.ToInt32(txtID.Text);
-        //        placa.placaImg = data;
-        //        //placa.modelo = txtModelo.Text;
-        //        placa.donoCPF = txtCPFCondutor.Text;
-        //        placa.placaNumero = txtNumPlaca.Text;
-
-        //        DalHelper.Update(placa);
-        //        ExibirDados();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Erro : " + ex.Message);
-        //    }
-        //}
-
-        //private void btnExcluirDados_Click(object sender, EventArgs e)
-        //{
-        //    if (string.IsNullOrEmpty(txtID.Text))
-        //    {
-        //        MessageBox.Show("Informe o ID do cliente a ser Excluído");
-        //        return;
-        //    }
-        //    try
-        //    {
-        //        int codigo = Convert.ToInt32(txtID.Text);
-        //        DalHelper.Delete(codigo);
-        //        ExibirDados();
-        //        LimpaDados();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Erro : " + ex.Message);
-        //    }
-        //}
-
         private void btnLocalizarDados_Click(object sender, EventArgs e)
         {
 
@@ -206,26 +120,6 @@ namespace CShp_MAC
 
             }
 
-
-
-            //if (string.IsNullOrEmpty(txtEmail.Text))
-            //{
-            //    MessageBox.Show("Informe o CPF do cliente a ser Localizado");
-            //    return;
-            //}
-            //try
-            //{
-            //    DataTable dt = new DataTable();
-            //    //int codigo = Convert.ToInt32(txtID.Text);
-            //    string codigo = txtEmail.Text;
-
-            //    dt = DalHelper.GetCarro(codigo);
-            //    dgvDados.DataSource = dt;
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Erro : " + ex.Message);
-            //}
         }
 
         private void btnEncerrar_Click(object sender, EventArgs e)
@@ -241,31 +135,10 @@ namespace CShp_MAC
             }
         }
 
-
-
-        //private void LimpaDados()
-        //{
-        //    txtID.Text = "";
-        //    txtNumPlaca.Text = "";
-        //    txtCPFCondutor.Text = "";
-        //    //txtModelo.Text = "";
-        //    txtBoxByteString.Text = "";
-        //    data = null;
-        //}
-
         private void setCarsForInfraction(string cpf)
         {
-            //cbbCarrosFromCPF.Items.Clear();
 
-            //List<string> carList = new List<string>();
-            //carList = DalHelper.getCarsFromCPF(cpf);
-
-            //string[] carListArray = carList.ToArray();
-
-            //cbbCarrosFromCPF.Items.AddRange(carListArray);
         }
-
-
 
         private void dgvDados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -274,43 +147,6 @@ namespace CShp_MAC
 
 
         }
-
-            //private void btnPathToImage_Click(object sender, EventArgs e)
-            //{
-            //    OpenFileDialog openPathBrowser = new OpenFileDialog();
-            //    openPathBrowser.RestoreDirectory = true;
-            //    openPathBrowser.DefaultExt = "jpg";
-            //    openPathBrowser.Filter = "image files (*.jpg)|*.jpg";
-
-            //    if (openPathBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            //    {
-            //        string strfilename = openPathBrowser.FileName;
-            //        imageToBytes(strfilename);
-            //    }
-            //}
-
-            //private void imageToBytes(string path)
-            //{
-
-            //    try
-            //    {
-            //        data = File.ReadAllBytes(path);
-            //        txtBoxByteString.Text = path;
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Console.WriteLine(ex.ToString());
-            //        data = null;
-            //        txtBoxByteString.Text = "Erro de carregamento da imagem.";
-            //    }
-
-            //}
-
-            //private void btnRandomId_Click(object sender, EventArgs e)
-            //{
-            //    LimpaDados();
-            //    //txtID.Text = DalHelper.generateRandomID().ToString();
-            //}
 
             private void cbbInfracoesList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -326,7 +162,6 @@ namespace CShp_MAC
             carMaintenanceForm.ShowDialog();
 
         }
-
 
         private void dgvDados_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -406,8 +241,6 @@ namespace CShp_MAC
                 Debug.WriteLine(dataSelecionada);
                 Debug.WriteLine(infracaoSelecionada);
 
-                //UPDATE Infraction List
-                //setCarsForInfraction(row.Cells["CPF"].Value.ToString());
 
             }
         }
