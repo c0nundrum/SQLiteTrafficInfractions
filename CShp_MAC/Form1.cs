@@ -1,6 +1,4 @@
 ﻿using System;
-using csharp_Sqlite;
-using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using System.IO;
@@ -58,11 +56,11 @@ namespace CShp_MAC
             } else {
 
                 Console.WriteLine("Database not found, creating Cadastro.sqlite!");
-                DalHelper.CriarBancoSQLite();
+                DAL.CriarBancoSQLite();
                 //Cria Tabelas
-                DalHelper.CriarTableProprietarioSQlite();
-                DalHelper.CriarTableCarroSQlite();
-                DalHelper.CriarTableInfracoesSQlite();
+                DAL.CriarTableProprietarioSQlite();
+                DAL.CriarTableCarroSQlite();
+                DAL.CriarTableInfracoesSQlite();
 
             }
            
@@ -75,12 +73,12 @@ namespace CShp_MAC
 
                 //Carros
                 DataTable dt = new DataTable();
-                dt = DalHelper.populateCarroTable();
+                dt = DAL.populateCarroTable();
                 dgvDados.DataSource = dt;
 
                 //Infracoes
                 DataTable dtInfracoes = new DataTable();
-                dtInfracoes = DalHelper.populateInfracoesTable();
+                dtInfracoes = DAL.populateInfracoesTable();
                 dgvInfracoes.DataSource = dtInfracoes;
 
             }
@@ -103,57 +101,32 @@ namespace CShp_MAC
             {
 
                 DataTable dt = new DataTable();
-                dt = DalHelper.filtraPlacasCarros(txtNumPlaca.Text);
+                dt = DAL.filtraPlacasCarros(txtNumPlaca.Text);
                 dgvDados.DataSource = dt;
 
             } else if (string.IsNullOrEmpty(txtNumPlaca.Text) && !string.IsNullOrEmpty(txtCPFCondutor.Text))
             {
 
                 DataTable dt = new DataTable();
-                dt = DalHelper.filtraCPFCarros(txtCPFCondutor.Text);
+                dt = DAL.filtraCPFCarros(txtCPFCondutor.Text);
                 dgvDados.DataSource = dt;
 
             } else if (!string.IsNullOrEmpty(txtNumPlaca.Text) && !string.IsNullOrEmpty(txtCPFCondutor.Text))
             {
 
                 DataTable dt = new DataTable();
-                dt = DalHelper.filtraCPFPlacasCarros(txtNumPlaca.Text, txtCPFCondutor.Text);
+                dt = DAL.filtraCPFPlacasCarros(txtNumPlaca.Text, txtCPFCondutor.Text);
                 dgvDados.DataSource = dt;
 
             }
 
         }
 
-        private void btnEncerrar_Click(object sender, EventArgs e)
-        {
-            const string mensagem = "Deseja Encerrar ?";
-            const string titulo = "Encerrar";
-            var resultado = MessageBox.Show(mensagem, titulo,
-                                         MessageBoxButtons.YesNo,
-                                         MessageBoxIcon.Question);
-            if (resultado == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
-        }
-
-        private void setCarsForInfraction(string cpf)
-        {
-
-        }
-
         private void dgvDados_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+        {   }
 
-            
-
-
-        }
-
-            private void cbbInfracoesList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        private void cbbInfracoesList_SelectedIndexChanged(object sender, EventArgs e)
+        {   }
 
         private void manterVeiculo_Click(object sender, EventArgs e)
         {
@@ -187,7 +160,7 @@ namespace CShp_MAC
 
                 //UPDATE Infraction List
                 DataTable dt = new DataTable();
-                dt = DalHelper.filtraPlacasInfracoes(placaSelecionada);
+                dt = DAL.filtraPlacasInfracoes(placaSelecionada);
                 dgvInfracoes.DataSource = dt;
 
             }
@@ -215,7 +188,7 @@ namespace CShp_MAC
             {
 
                 DataTable dt = new DataTable();
-                dt = DalHelper.filtraPlacasInfracoes(txtNumPlaca.Text);
+                dt = DAL.filtraPlacasInfracoes(txtNumPlaca.Text);
                 dgvInfracoes.DataSource = dt;
 
             }
@@ -223,7 +196,7 @@ namespace CShp_MAC
             {
 
                 DataTable dt = new DataTable();
-                dt = DalHelper.filtraCPFInfracoes(txtCPFCondutor.Text);
+                dt = DAL.filtraCPFInfracoes(txtCPFCondutor.Text);
                 dgvInfracoes.DataSource = dt;
 
             }
@@ -231,7 +204,7 @@ namespace CShp_MAC
             {
 
                 DataTable dt = new DataTable();
-                dt = DalHelper.filtraCPFPlacasInfracoes(txtNumPlaca.Text, txtCPFCondutor.Text);
+                dt = DAL.filtraCPFPlacasInfracoes(txtNumPlaca.Text, txtCPFCondutor.Text);
                 dgvInfracoes.DataSource = dt;
 
             }

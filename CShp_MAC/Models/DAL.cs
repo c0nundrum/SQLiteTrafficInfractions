@@ -328,7 +328,7 @@ namespace CShp_MAC.Models
             {
                 using (var cmd = DbConnection().CreateCommand())
                 {
-                    cmd.CommandText = "SELECT NOME, CPF FROM PROPRIETARIO WHERE NOME = '" + nome + "'";
+                    cmd.CommandText = "SELECT NOME, CPF FROM PROPRIETARIO WHERE NOME LIKE '%" + nome + "%'";
                     da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
                     da.Fill(dt);
                     return dt;
@@ -368,7 +368,7 @@ namespace CShp_MAC.Models
             {
                 using (var cmd = DbConnection().CreateCommand())
                 {
-                    cmd.CommandText = "SELECT NOME, CPF FROM PROPRIETARIO WHERE CPF = '" + cpf + "' AND NOME = '" + nome + "'";
+                    cmd.CommandText = "SELECT NOME, CPF FROM PROPRIETARIO WHERE CPF = '" + cpf + "' AND NOME LIKE '%" + nome + "%'";
                     da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
                     da.Fill(dt);
                     return dt;

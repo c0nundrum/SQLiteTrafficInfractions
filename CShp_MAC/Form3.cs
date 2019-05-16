@@ -1,5 +1,4 @@
-﻿using csharp_Sqlite;
-using CShp_MAC.Models;
+﻿using CShp_MAC.Models;
 using System;
 using System.Windows.Forms;
 
@@ -80,18 +79,11 @@ namespace CShp_MAC
 
             if (valida(infracaoSelecionada))
             {
-                //Infracao infracao = new Infracao();
-
-                //infracao.cpfNumero = cpfTextBox.Text;
-                //infracao.placaNumero = carroTxtBox.Text;
-                //infracao.data = infracaoData.Text;
-                //infracao.infracao = infracaoSelecionada;
-
-                //DalHelper.insertInfracoes(infracao);
 
                 EInfracao infracao = new EInfracao(infracaoSelecionada, infracaoData.Text, carroTxtBox.Text, cpfTextBox.Text);
                 infracao.InsertInfracao();
                 this.Close();
+
 
             } else
             {

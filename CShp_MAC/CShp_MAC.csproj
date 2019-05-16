@@ -101,18 +101,13 @@
     <Compile Include="Models\ECarro.cs" />
     <Compile Include="Models\EInfracao.cs" />
     <Compile Include="Models\EProprietario.cs" />
-    <Compile Include="Models\Infracao.cs" />
-    <Compile Include="Models\DalHelper.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Cliente.cs" />
-    <Compile Include="Models\Placa.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

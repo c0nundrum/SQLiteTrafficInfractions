@@ -1,12 +1,4 @@
-﻿using csharp_Sqlite;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 
@@ -52,7 +44,6 @@ namespace CShp_MAC
                 Models.EProprietario proprietario = new Models.EProprietario(nomeTxtBox.Text, cpfBox.Text);
                 proprietario.InsertProprietario();
 
-                //DalHelper.insertProprietario(nomeTxtBox.Text, cpfBox.Text);
                 this.Close();
 
             } else
