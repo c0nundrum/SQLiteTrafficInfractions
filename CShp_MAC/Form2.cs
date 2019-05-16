@@ -12,7 +12,7 @@ namespace CShp_MAC
 
         private bool valida()
         {
-            if(!string.IsNullOrEmpty(cpfProprietario.Text) && !string.IsNullOrEmpty(numeroPlaca.Text) && data != null)
+            if(!string.IsNullOrEmpty(cpfProprietario.Text) && !string.IsNullOrEmpty(numeroPlaca.Text))
             {
 
                 return true;
@@ -30,12 +30,28 @@ namespace CShp_MAC
             InitializeComponent();
         }
 
-        public void inicializaTextBox(string numPlaca, string cpf)
+        public void inicializaTextBox(string numPlaca, string cpf, Image imagemSelecionada)
         {
+
+
+
             numeroPlaca.Text = numPlaca;
 
             cpfProprietario.Text = cpf;
 
+            pictureBox1.BackgroundImage = imagemSelecionada;
+
+            data = ImageToByteArray(imagemSelecionada);
+
+        }
+
+        public byte[] ImageToByteArray(Image imageIn)
+        {
+            using (var ms = new MemoryStream())
+            {
+                imageIn.Save(ms, imageIn.RawFormat);
+                return ms.ToArray();
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -51,9 +67,25 @@ namespace CShp_MAC
                 {
 
                     Models.ECarro carro = new Models.ECarro(data, cpfProprietario.Text, numeroPlaca.Text);
-                    carro.InsertCarro();
 
-                    this.Close();
+                    if (string.IsNullOrEmpty(carro.ROWID)){
+
+                        carro.InsertCarro();
+
+                    } else
+                    {
+                        DialogResult dialogResult = MessageBox.Show("Carro encontrado, deseja substituir?", "Aviso", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            carro.InsertCarro();
+                            this.Close();
+                        }
+                        else if (dialogResult == DialogResult.No)
+                        {
+                            //Nao faça nada
+                            return;
+                        }
+                    }
 
                 } else
                 {

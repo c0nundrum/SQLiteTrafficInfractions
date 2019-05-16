@@ -336,7 +336,7 @@ namespace csharp_Sqlite
             {
                 using (var cmd = DbConnection().CreateCommand())
                 {
-                    cmd.CommandText = "SELECT INFRACOES, DATA, PLACA_NUMBER, CPF, NOME FROM INFRACOES INNER JOIN PROPRIETARIO ON INFRACOES.PROPRIETARIO_ID = PROPRIETARIO.ROWID INNER JOIN CARRO ON INFRACOES.CARRO_ID = CARRO.ROWID";
+                    cmd.CommandText = "SELECT INFRACOES, DATA, PLACA_NUMBER, CPF, NOME FROM INFRACOES LEFT OUTER JOIN PROPRIETARIO ON INFRACOES.PROPRIETARIO_ID = PROPRIETARIO.ROWID LEFT OUTER JOIN CARRO ON INFRACOES.CARRO_ID = CARRO.ROWID";
                     da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
                     da.Fill(dt);
                     return dt;

@@ -174,6 +174,88 @@ namespace CShp_MAC.Models
             }
         }
 
+        public static bool ForeignKeyINFRACAOCheck(string rowID)
+        {
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+
+                    cmd.CommandText = "SELECT ROWID FROM INFRACOES WHERE CARRO_ID = @CARRO_ID";
+                    cmd.Parameters.AddWithValue("@CARRO_ID", rowID);
+
+                    object result = cmd.ExecuteScalar();
+
+                    string resultINFRACOES = result == null ? "" : result.ToString();
+
+                    Debug.WriteLine("Infracao: " + resultINFRACOES);
+
+
+                    if (string.IsNullOrEmpty(resultINFRACOES))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Excepted in getIdFromPlaca");
+                throw ex;
+            }
+        }
+
+
+        public static bool ForeignKeyCheck(string rowID)
+        {
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+
+
+                    cmd.CommandText = "SELECT ROWID FROM CARRO WHERE PROPRIETARIO_ID = @PROPRIETARIO_ID";
+                    cmd.Parameters.AddWithValue("@PROPRIETARIO_ID", rowID);
+
+                    object result = cmd.ExecuteScalar();
+
+
+                    string resultCARRO = result == null ? "" : result.ToString();
+                    Debug.WriteLine("Carro: " + resultCARRO);
+
+                    cmd.CommandText = "SELECT ROWID FROM INFRACOES WHERE PROPRIETARIO_ID = @PROPRIETARIO_ID";
+                    cmd.Parameters.AddWithValue("@PROPRIETARIO_ID", rowID);
+
+                    result = cmd.ExecuteScalar();
+
+                    string resultINFRACOES = result == null ? "" : result.ToString();
+
+                    Debug.WriteLine("Infracao: " + resultINFRACOES);
+
+
+                    if (string.IsNullOrEmpty(resultCARRO) && string.IsNullOrEmpty(resultINFRACOES))
+                    {
+                        return true;
+                    } else
+                    {
+                        return false;
+                    }
+
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Excepted in getIdFromPlaca");
+                throw ex;
+            }
+        }
+
         //Metodos para popular a tabela
         public static DataTable populateInfracoesTable()
         {
@@ -215,7 +297,130 @@ namespace CShp_MAC.Models
             }
         }
 
+        public static DataTable populateProprietarioTable()
+        {
+            SQLiteDataAdapter da = null;
+            DataTable dt = new DataTable();
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+                    cmd.CommandText = "SELECT NOME, CPF FROM PROPRIETARIO";
+                    da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         //Metodos de filtragem
+
+        public static DataTable filtraProprietarioNome(string nome)
+        {
+            SQLiteDataAdapter da = null;
+            DataTable dt = new DataTable();
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+                    cmd.CommandText = "SELECT NOME, CPF FROM PROPRIETARIO WHERE NOME = '" + nome + "'";
+                    da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static DataTable filtraProprietarioCPF(string cpf)
+        {
+            SQLiteDataAdapter da = null;
+            DataTable dt = new DataTable();
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+                    cmd.CommandText = "SELECT NOME, CPF FROM PROPRIETARIO WHERE CPF = '" + cpf + "'";
+                    da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static DataTable filtraProprietarioCPFNome(string cpf, string nome)
+        {
+            SQLiteDataAdapter da = null;
+            DataTable dt = new DataTable();
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+                    cmd.CommandText = "SELECT NOME, CPF FROM PROPRIETARIO WHERE CPF = '" + cpf + "' AND NOME = '" + nome + "'";
+                    da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static DataTable filtraCarroNome(string nome)
+        {
+            SQLiteDataAdapter da = null;
+            DataTable dt = new DataTable();
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+                    cmd.CommandText = "SELECT PLACA_NUMBER, PLACA, CPF, NOME FROM CARRO INNER JOIN PROPRIETARIO ON CARRO.PROPRIETARIO_ID = PROPRIETARIO.ROWID WHERE NOME LIKE '%" + nome + "%'";
+                    da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static DataTable filtraInfracaoNome(string nome)
+        {
+            SQLiteDataAdapter da = null;
+            DataTable dt = new DataTable();
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+                    cmd.CommandText = "SELECT INFRACOES, DATA, PLACA_NUMBER, CPF, NOME FROM INFRACOES INNER JOIN PROPRIETARIO ON INFRACOES.PROPRIETARIO_ID = PROPRIETARIO.ROWID INNER JOIN CARRO ON INFRACOES.CARRO_ID = CARRO.ROWID WHERE NOME LIKE '%" + nome + "%'";
+                    da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         public static DataTable filtraPlacasCarros(string numPlaca)
         {
             SQLiteDataAdapter da = null;
@@ -235,6 +440,7 @@ namespace CShp_MAC.Models
                 throw ex;
             }
         }
+
 
         public static DataTable filtraCPFCarros(string cpf)
         {

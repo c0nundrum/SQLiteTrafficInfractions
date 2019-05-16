@@ -95,11 +95,11 @@
             // 
             // adicionarEntrada
             // 
-            this.adicionarEntrada.Location = new System.Drawing.Point(162, 256);
+            this.adicionarEntrada.Location = new System.Drawing.Point(137, 250);
             this.adicionarEntrada.Name = "adicionarEntrada";
-            this.adicionarEntrada.Size = new System.Drawing.Size(75, 23);
+            this.adicionarEntrada.Size = new System.Drawing.Size(100, 35);
             this.adicionarEntrada.TabIndex = 7;
-            this.adicionarEntrada.Text = "Modificar";
+            this.adicionarEntrada.Text = "Modificar / Adicionar";
             this.adicionarEntrada.UseVisualStyleBackColor = true;
             this.adicionarEntrada.Click += new System.EventHandler(this.adicionarEntrada_Click);
             // 
@@ -128,7 +128,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(275, 295);
+            this.ClientSize = new System.Drawing.Size(270, 302);
             this.Controls.Add(this.excluirButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.adicionarEntrada);

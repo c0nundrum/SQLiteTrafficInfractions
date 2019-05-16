@@ -12,7 +12,7 @@ namespace CShp_MAC.Models
         private string DonoCPF { get; set; }
         private string PlacaNumero { get; set; }
 
-        private string ROWID = "";
+        public string ROWID = "";
         private string OWNERID = "";
 
         //Metodo Construtor
@@ -26,7 +26,7 @@ namespace CShp_MAC.Models
 
             OWNERID = getOwnerId(donoCPF);
 
-            SetProprietario();
+
 
         }
 
@@ -53,6 +53,7 @@ namespace CShp_MAC.Models
 
         public void InsertCarro()
         {
+            SetProprietario();
             //Se não encontrado nenhuma placa igual no banco de dados
             if (string.IsNullOrEmpty(ROWID))
             {
@@ -121,29 +122,37 @@ namespace CShp_MAC.Models
             string ROWID = getIdFromCar(numeroPlaca);
             if (!string.IsNullOrEmpty(ROWID))
             {
-                try
+                if (ForeignKeyINFRACAOCheck(ROWID))
                 {
-                    using (var cmd = new SQLiteCommand(DbConnection()))
+                    try
                     {
-                        cmd.CommandText = "DELETE FROM CARRO Where ROWID=@ROWID";
-                        cmd.Parameters.AddWithValue("@ROWID", ROWID);
-                        cmd.ExecuteNonQuery();
+                        using (var cmd = new SQLiteCommand(DbConnection()))
+                        {
+                            cmd.CommandText = "DELETE FROM CARRO Where ROWID=@ROWID";
+                            cmd.Parameters.AddWithValue("@ROWID", ROWID);
+                            cmd.ExecuteNonQuery();
+                        }
+                        MessageBox.Show("Entrada " + numeroPlaca + " deletada!", "Sucesso",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    MessageBox.Show("Entrada " + numeroPlaca + " deletada!", "Sucesso",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
 
-            } else
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, limpe as infrações do carro", "Erro",
+                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
             {
-                MessageBox.Show("Entrada da deleção não encontrada", "Erro",
+                MessageBox.Show("Entrada para deleção não encotrada", "Erro",
                      MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
-
-
     }
 }

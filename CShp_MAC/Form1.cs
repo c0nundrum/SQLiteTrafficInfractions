@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.IO;
 using CShp_MAC.Models;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace CShp_MAC
 {
@@ -16,6 +17,7 @@ namespace CShp_MAC
         string cpfSelecionado = "";
         string dataSelecionada = "";
         string infracaoSelecionada = "";
+        byte[] data = null;
 
         public Form1()
         {
@@ -157,11 +159,12 @@ namespace CShp_MAC
         {
             Form2 carMaintenanceForm = new Form2();
 
-            carMaintenanceForm.inicializaTextBox(placaSelecionada, cpfSelecionado);
+            carMaintenanceForm.inicializaTextBox(placaSelecionada, cpfSelecionado, imageBox.BackgroundImage);
 
             carMaintenanceForm.ShowDialog();
 
         }
+
 
         private void dgvDados_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -172,6 +175,12 @@ namespace CShp_MAC
 
                 placaSelecionada = row.Cells["PLACA_NUMBER"].Value.ToString();
                 cpfSelecionado = row.Cells["CPF"].Value.ToString();
+
+                data = (Byte[])(row.Cells["PLACA"].Value);
+                var stream = new MemoryStream(data);
+
+
+                imageBox.BackgroundImage = Image.FromStream(stream);
 
                 Debug.WriteLine(placaSelecionada);
                 Debug.WriteLine(cpfSelecionado);
@@ -237,12 +246,37 @@ namespace CShp_MAC
 
                 dataSelecionada = row.Cells["DATA"].Value.ToString();
                 infracaoSelecionada = row.Cells["INFRACOES"].Value.ToString();
+                cpfSelecionado = row.Cells["CPF"].Value.ToString(); ;
 
                 Debug.WriteLine(dataSelecionada);
                 Debug.WriteLine(infracaoSelecionada);
 
 
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FProprietariosMaintenance proprietarioForm = new FProprietariosMaintenance();
+            proprietarioForm.Show();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nomeFiltro_Click(object sender, EventArgs e)
+        {
+
+            DataTable dt = new DataTable();
+            dt = DAL.filtraCarroNome(nomeTxtBox.Text);
+            dgvDados.DataSource = dt;
+
+            DataTable dtInfracoes = new DataTable();
+            dtInfracoes = DAL.filtraInfracaoNome(nomeTxtBox.Text);
+            dgvInfracoes.DataSource = dtInfracoes;
+
         }
     }
 }

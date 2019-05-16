@@ -46,8 +46,12 @@ namespace CShp_MAC
         {
             if (valida())
             {
+
                 this.DialogResult = DialogResult.OK;
-                DalHelper.insertProprietario(nomeTxtBox.Text, cpfBox.Text);
+                Models.EProprietario proprietario = new Models.EProprietario(nomeTxtBox.Text, cpfBox.Text);
+                proprietario.InsertProprietario();
+
+                //DalHelper.insertProprietario(nomeTxtBox.Text, cpfBox.Text);
                 this.Close();
 
             } else
