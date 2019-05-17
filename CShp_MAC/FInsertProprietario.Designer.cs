@@ -1,6 +1,6 @@
 ﻿namespace CShp_MAC
 {
-    partial class Form4
+    partial class FInsertProprietario
     {
         /// <summary>
         /// Required designer variable.

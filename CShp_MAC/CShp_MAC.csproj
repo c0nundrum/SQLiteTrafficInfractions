@@ -73,23 +73,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form2.cs">
+    <Compile Include="FCarroMaintenance.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="FCarroMaintenance.Designer.cs">
+      <DependentUpon>FCarroMaintenance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form3.cs">
+    <Compile Include="FInfracoesMaintenance.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form3.Designer.cs">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <Compile Include="FInfracoesMaintenance.Designer.cs">
+      <DependentUpon>FInfracoesMaintenance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form4.cs">
+    <Compile Include="FInsertProprietario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form4.Designer.cs">
-      <DependentUpon>Form4.cs</DependentUpon>
+    <Compile Include="FInsertProprietario.Designer.cs">
+      <DependentUpon>FInsertProprietario.cs</DependentUpon>
     </Compile>
     <Compile Include="FProprietariosMaintenance.cs">
       <SubType>Form</SubType>
@@ -101,25 +101,25 @@
     <Compile Include="Models\ECarro.cs" />
     <Compile Include="Models\EInfracao.cs" />
     <Compile Include="Models\EProprietario.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="FMainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FMainWindow.Designer.cs">
+      <DependentUpon>FMainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="FMainWindow.resx">
+      <DependentUpon>FMainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="FCarroMaintenance.resx">
+      <DependentUpon>FCarroMaintenance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <EmbeddedResource Include="FInfracoesMaintenance.resx">
+      <DependentUpon>FInfracoesMaintenance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form4.resx">
-      <DependentUpon>Form4.cs</DependentUpon>
+    <EmbeddedResource Include="FInsertProprietario.resx">
+      <DependentUpon>FInsertProprietario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FProprietariosMaintenance.resx">
       <DependentUpon>FProprietariosMaintenance.cs</DependentUpon>
@@ -132,7 +132,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -146,6 +148,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Traffic-Ticket-Credit-Score.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\System.Data.SQLite.Core.targets')" />

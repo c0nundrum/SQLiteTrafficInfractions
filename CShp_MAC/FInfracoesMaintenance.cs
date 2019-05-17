@@ -4,9 +4,9 @@ using System.Windows.Forms;
 
 namespace CShp_MAC
 {
-    public partial class Form3 : Form
+    public partial class FInfracoesMaintenance : Form
     {
-        public Form3(string carroPlaca, string cpfCondutor, string dataSelecionada, string infracaoSelecionada)
+        public FInfracoesMaintenance(string carroPlaca, string cpfCondutor, string dataSelecionada, string infracaoSelecionada)
         {
             
             InitializeComponent();

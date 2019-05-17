@@ -18,7 +18,7 @@ namespace CShp_MAC
 
         private bool valida()
         {
-            if (!string.IsNullOrEmpty(nomeTxtBox.Text) && !string.IsNullOrEmpty(CpfTxtBox.Text))
+            if (!string.IsNullOrEmpty(CpfTxtBox.Text))
             {
 
                 return true;
@@ -94,6 +94,11 @@ namespace CShp_MAC
                 proprietario.InsertProprietario();
 
             }
+            else
+            {
+                MessageBox.Show("Por favor, insira um cpf.", "Erro",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             
 
         }
@@ -105,6 +110,11 @@ namespace CShp_MAC
 
                 Models.EProprietario.DeleteRow(CpfTxtBox.Text);
 
+            }
+            else
+            {
+                MessageBox.Show("Por favor, insira um cpf.", "Erro",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

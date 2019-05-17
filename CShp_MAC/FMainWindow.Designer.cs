@@ -1,6 +1,6 @@
 ﻿namespace CShp_MAC
 {
-    partial class Form1
+    partial class FMainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.imageBox = new System.Windows.Forms.PictureBox();
             this.manterVeiculo = new System.Windows.Forms.Button();
             this.dgvDados = new System.Windows.Forms.DataGridView();
+            this.imageBox = new System.Windows.Forms.PictureBox();
             this.btnLocalizarDados = new System.Windows.Forms.Button();
             this.txtCPFCondutor = new System.Windows.Forms.MaskedTextBox();
             this.txtNumPlaca = new System.Windows.Forms.MaskedTextBox();
@@ -45,12 +44,12 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.filtrarInfracoesBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.nomeTxtBox = new System.Windows.Forms.TextBox();
             this.nomeFiltro = new System.Windows.Forms.Button();
+            this.nomeTxtBox = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imageBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInfracoes)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -64,16 +63,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1068, 432);
             this.panel1.TabIndex = 0;
-            // 
-            // imageBox
-            // 
-            this.imageBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("imageBox.BackgroundImage")));
-            this.imageBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.imageBox.Location = new System.Drawing.Point(118, 19);
-            this.imageBox.Name = "imageBox";
-            this.imageBox.Size = new System.Drawing.Size(134, 128);
-            this.imageBox.TabIndex = 20;
-            this.imageBox.TabStop = false;
             // 
             // manterVeiculo
             // 
@@ -96,6 +85,16 @@
             this.dgvDados.TabIndex = 6;
             this.dgvDados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDados_CellClick);
             this.dgvDados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDados_CellContentClick);
+            // 
+            // imageBox
+            // 
+            this.imageBox.BackgroundImage = global::CShp_MAC.Properties.Resources.Traffic_Ticket_Credit_Score;
+            this.imageBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.imageBox.Location = new System.Drawing.Point(118, 19);
+            this.imageBox.Name = "imageBox";
+            this.imageBox.Size = new System.Drawing.Size(134, 128);
+            this.imageBox.TabIndex = 20;
+            this.imageBox.TabStop = false;
             // 
             // btnLocalizarDados
             // 
@@ -201,23 +200,6 @@
             this.panel2.Size = new System.Drawing.Size(258, 576);
             this.panel2.TabIndex = 4;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(3, 153);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(252, 45);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "Manter Proprietários";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // nomeTxtBox
-            // 
-            this.nomeTxtBox.Location = new System.Drawing.Point(8, 127);
-            this.nomeTxtBox.Name = "nomeTxtBox";
-            this.nomeTxtBox.Size = new System.Drawing.Size(104, 20);
-            this.nomeTxtBox.TabIndex = 22;
-            // 
             // nomeFiltro
             // 
             this.nomeFiltro.Location = new System.Drawing.Point(8, 101);
@@ -228,7 +210,24 @@
             this.nomeFiltro.UseVisualStyleBackColor = true;
             this.nomeFiltro.Click += new System.EventHandler(this.nomeFiltro_Click);
             // 
-            // Form1
+            // nomeTxtBox
+            // 
+            this.nomeTxtBox.Location = new System.Drawing.Point(8, 127);
+            this.nomeTxtBox.Name = "nomeTxtBox";
+            this.nomeTxtBox.Size = new System.Drawing.Size(104, 20);
+            this.nomeTxtBox.TabIndex = 22;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(3, 153);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(252, 45);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "Manter Proprietários";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // FMainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -236,12 +235,12 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
-            this.Name = "Form1";
+            this.Name = "FMainWindow";
             this.Text = " ";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.imageBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInfracoes)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

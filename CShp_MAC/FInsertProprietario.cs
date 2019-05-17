@@ -4,9 +4,9 @@ using System.Windows.Forms;
 
 namespace CShp_MAC
 {
-    public partial class Form4 : Form
+    public partial class FInsertProprietario : Form
     {
-        public Form4(string cpf)
+        public FInsertProprietario(string cpf)
         {
             InitializeComponent();
 

@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace CShp_MAC
 {
-    public partial class Form1 : Form
+    public partial class FMainWindow : Form
     {
 
         string placaSelecionada = "";
@@ -17,7 +17,7 @@ namespace CShp_MAC
         string infracaoSelecionada = "";
         byte[] data = null;
 
-        public Form1()
+        public FMainWindow()
         {
 
             InitializeComponent();
@@ -130,7 +130,7 @@ namespace CShp_MAC
 
         private void manterVeiculo_Click(object sender, EventArgs e)
         {
-            Form2 carMaintenanceForm = new Form2();
+            FCarroMaintenance carMaintenanceForm = new FCarroMaintenance();
 
             carMaintenanceForm.inicializaTextBox(placaSelecionada, cpfSelecionado, imageBox.BackgroundImage);
 
@@ -169,7 +169,7 @@ namespace CShp_MAC
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Form3 infractionMaintenanceForm = new Form3(placaSelecionada, cpfSelecionado, dataSelecionada, infracaoSelecionada);
+            FInfracoesMaintenance infractionMaintenanceForm = new FInfracoesMaintenance(placaSelecionada, cpfSelecionado, dataSelecionada, infracaoSelecionada);
 
             infractionMaintenanceForm.Show();
         }

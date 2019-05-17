@@ -31,8 +31,30 @@ namespace CShp_MAC.Models
 
         }
 
+        //Quando criado, tenha certeza que o carro tem um dono
+        private void SetProprietario()
+        {
+
+            while (string.IsNullOrEmpty(OWNERID))
+            {
+                FInsertProprietario ownerForm = new FInsertProprietario(CpfNumero);
+
+                var result = ownerForm.ShowDialog();
+
+                if (result == DialogResult.Cancel)
+                {
+                    return;
+                }
+
+                OWNERID = getOwnerId(CpfNumero);
+
+            }
+
+        }
+
         public void InsertInfracao()
         {
+            SetProprietario();
             //Se não encontrado nenhuma placa igual no banco de dados
             if (string.IsNullOrEmpty(ROWID))
             {

@@ -36,7 +36,7 @@ namespace CShp_MAC.Models
 
             while (string.IsNullOrEmpty(OWNERID))
             {
-                Form4 ownerForm = new Form4(DonoCPF);
+                FInsertProprietario ownerForm = new FInsertProprietario(DonoCPF);
 
                 var result = ownerForm.ShowDialog();
 

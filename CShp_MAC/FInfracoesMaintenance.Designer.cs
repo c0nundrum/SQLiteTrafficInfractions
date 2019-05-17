@@ -1,6 +1,6 @@
 ﻿namespace CShp_MAC
 {
-    partial class Form3
+    partial class FInfracoesMaintenance
     {
         /// <summary>
         /// Required designer variable.
