@@ -38,6 +38,7 @@
             this.adicionarEntrada = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.excluirButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,11 +125,21 @@
             this.excluirButton.UseVisualStyleBackColor = true;
             this.excluirButton.Click += new System.EventHandler(this.excluirButton_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 299);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(251, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Para Exclusão forneça apenas um número de placa";
+            // 
             // FCarroMaintenance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(270, 302);
+            this.ClientSize = new System.Drawing.Size(270, 321);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.excluirButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.adicionarEntrada);
@@ -158,5 +169,6 @@
         private System.Windows.Forms.Button adicionarEntrada;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button excluirButton;
+        private System.Windows.Forms.Label label4;
     }
 }

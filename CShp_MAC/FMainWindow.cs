@@ -148,12 +148,27 @@ namespace CShp_MAC
 
                 placaSelecionada = row.Cells["PLACA_NUMBER"].Value.ToString();
                 cpfSelecionado = row.Cells["CPF"].Value.ToString();
+                try
+                {
+                    if (!string.IsNullOrEmpty(row.Cells["PLACA"].Value.ToString()))
+                    {
+                        data = (Byte[])(row.Cells["PLACA"].Value);
+                        data = (Byte[])(row.Cells["PLACA"].Value);
+                        var stream = new MemoryStream(data);
+                        imageBox.BackgroundImage = Image.FromStream(stream);
+                    }
+                    else
+                    {
+                        Debug.WriteLine("No image selected");
+                        imageBox.BackgroundImage = Properties.Resources.Traffic_Ticket_Credit_Score;
+                    }
 
-                data = (Byte[])(row.Cells["PLACA"].Value);
-                var stream = new MemoryStream(data);
+                }
+                catch (Exception)
+                {
+                    Debug.WriteLine("Exceção de imageData");
+                }
 
-
-                imageBox.BackgroundImage = Image.FromStream(stream);
 
                 Debug.WriteLine(placaSelecionada);
                 Debug.WriteLine(cpfSelecionado);
@@ -169,9 +184,17 @@ namespace CShp_MAC
 
         private void button3_Click(object sender, EventArgs e)
         {
-            FInfracoesMaintenance infractionMaintenanceForm = new FInfracoesMaintenance(placaSelecionada, cpfSelecionado, dataSelecionada, infracaoSelecionada);
+            if (string.IsNullOrEmpty(placaSelecionada))
+            {
+                MessageBox.Show("Por favor, selecione um carro para cadastrar a infração", "Erro",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else
+            {
+                FInfracoesMaintenance infractionMaintenanceForm = new FInfracoesMaintenance(placaSelecionada, cpfSelecionado, dataSelecionada, infracaoSelecionada);
 
-            infractionMaintenanceForm.Show();
+                infractionMaintenanceForm.Show();
+            }
+
         }
 
         private void filtrarInfracoesBtn_Click(object sender, EventArgs e)

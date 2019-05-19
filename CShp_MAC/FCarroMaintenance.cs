@@ -94,7 +94,7 @@ namespace CShp_MAC
 
                 } else
                 {
-                    MessageBox.Show("Por favor passe todas as informações necessárias", "Erro",
+                    MessageBox.Show("Por favor a Placa do carro e o cpf para que seja modificada ou adicionada.", "Erro",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }

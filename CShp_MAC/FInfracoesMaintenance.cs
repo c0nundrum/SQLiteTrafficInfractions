@@ -72,7 +72,7 @@ namespace CShp_MAC
             catch (Exception)
             {
 
-                MessageBox.Show("Por favor, forneça todas as informações", "Erro",
+                MessageBox.Show("Por favor, selecione a Infração", "Erro",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -87,7 +87,7 @@ namespace CShp_MAC
 
             } else
             {
-                MessageBox.Show("Por favor, forneça todas as informações", "Erro",
+                MessageBox.Show("Por favor, forneça a infração, a data e o cpf do infrator", "Erro",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 

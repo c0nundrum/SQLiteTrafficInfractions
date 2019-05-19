@@ -38,6 +38,7 @@
             this.carroTxtBox = new System.Windows.Forms.TextBox();
             this.cpfTextBox = new System.Windows.Forms.TextBox();
             this.infracaoData = new System.Windows.Forms.DateTimePicker();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -130,11 +131,21 @@
             this.infracaoData.Size = new System.Drawing.Size(205, 20);
             this.infracaoData.TabIndex = 9;
             // 
-            // Form3
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(41, 251);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(339, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Para exclusão são necessários  a Infração, a data e o cpf do condutor";
+            // 
+            // FInfracoesMaintenance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(414, 266);
+            this.ClientSize = new System.Drawing.Size(414, 273);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.infracaoData);
             this.Controls.Add(this.cpfTextBox);
             this.Controls.Add(this.carroTxtBox);
@@ -145,7 +156,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form3";
+            this.Name = "FInfracoesMaintenance";
             this.Text = "Form3";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -164,5 +175,6 @@
         private System.Windows.Forms.TextBox carroTxtBox;
         private System.Windows.Forms.TextBox cpfTextBox;
         private System.Windows.Forms.DateTimePicker infracaoData;
+        private System.Windows.Forms.Label label5;
     }
 }

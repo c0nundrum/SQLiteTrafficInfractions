@@ -144,7 +144,7 @@ namespace CShp_MAC.Models
             }
             else
             {
-                MessageBox.Show("Entrada da deleção não encontrada", "Erro",
+                MessageBox.Show("Entrada de infração para a deleção não encontrada", "Erro",
                      MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
